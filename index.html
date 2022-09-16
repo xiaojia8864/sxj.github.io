@@ -1,0 +1,1263 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body, html { font-size: 100%; 	padding: 0; margin: 0;}
+
+/* Reset */
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+body{
+	width: 1520px;
+  	margin: 0 auto;
+	font-weight: 500;
+	font-size: 1.05em;
+	font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+}
+a{ color:black;outline: none;text-decoration: none;-webkit-transition: 0.2s;transition: 0.2s;}
+a:hover,a:focus{color:#c04851;text-decoration: none;}
+.container{
+	margin: 0 auto;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	
+  background-image: url(image/background.png);
+  background-size:100%;
+  z-index: -1;
+  
+}
+/**/
+.container{
+	position: relative;
+	width: 1000px;
+	height: 520px;
+	margin: 100px auto 100px;
+	font: 1em 'Rationale',sans-serif;
+}
+.slider, .img {
+	width: inherit;
+	height: inherit;
+}
+.slider {
+	position: relative;
+	overflow: hidden;
+	background-color: #000;
+	border:8px solid #eee;
+	border-radius: 5px;
+	box-shadow: 0 7px 20px rgba(0,0,0,.5);
+
+}
+.img {
+	position: absolute;
+	margin-left: -8px;
+	perspective: 500px;
+}
+
+/*.img1 .frag {
+	background: url(images/auto.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}*/
+
+.img1 .frag {background-image: url(image/0.1.jpg)}
+.img2 .frag {background-image: url(image/4background1.jpg); }
+.img3 .frag {background-image: url(image/sy4.jpg) }
+.img4 .frag {background-image: url(image/sy1.jpg)}
+.img5 .frag {background-image: url(image/sy2.jpg)}
+.img6 .frag {background-image: url(image/sy3.jpg)}	
+
+.frag {
+	width: 250px;
+	height: inherit;
+	float: left;
+	opacity: 0;
+	z-index: 0;
+	transform-origin: center right;
+	transform: rotateY(90deg) translateZ(100px) scale(1.5);
+	transition: transform .6s, opacity .6s, -webkit-filter .8s ease-out;
+	-webkit-filter: saturate(0) blur(10px) brightness(.6) contrast(4);
+}	
+.img .frag2  {
+	background-position: -250px 0;
+	transition-delay: .1s;
+}
+.img .frag3  {
+	background-position: -500px 0;
+	transition-delay: .2s;
+}
+.img .frag4  {
+	background-position: -750px 0;
+	transition-delay: .3s;
+}
+.img .frag5  {
+	background-position: 0 0;
+	transition-delay: .4s;
+}
+.img .frag6  {
+	background-position: 0 0;
+	transition-delay: .5s;
+}
+#slide1:checked ~ .slider .img1 .frag,
+#slide2:checked ~ .slider .img2 .frag,
+#slide3:checked ~ .slider .img3 .frag,
+#slide4:checked ~ .slider .img4 .frag,
+#slide5:checked ~ .slider .img5 .frag,
+#slide6:checked ~ .slider .img6 .frag {
+	transform: rotateY(0) translateZ(0) scale(1);
+	-webkit-filter: saturate(1) blur(0) brightness(1) contrast(1);
+	opacity: 1;
+	z-index: 1;
+}
+.controls {
+	position: absolute;
+	bottom: -50px;
+	left: 50%; 
+	margin-left: -115px; /*(6elem30px+5el10px)/2=115px*/
+
+}
+.controls label {
+	display: block;
+	height: 10px;
+	width: 30px;
+	float: left;
+	background-color: #000;
+	margin-right: 10px;
+	cursor: pointer;
+	opacity: .2;
+	transition:opacity .5s;
+}
+.controls label:hover,
+.side-controls label:hover,
+#slide1:checked ~ .controls label:nth-of-type(1),
+#slide2:checked ~ .controls label:nth-of-type(2),
+#slide3:checked ~ .controls label:nth-of-type(3),
+#slide4:checked ~ .controls label:nth-of-type(4),
+#slide5:checked ~ .controls label:nth-of-type(5),
+#slide6:checked ~ .controls label:nth-of-type(6) {
+	opacity: .8;
+}
+.side-controls label {
+	position: absolute;
+	display: block;
+	border-top: 30px solid transparent;
+	border-bottom: 30px solid transparent;
+	top: 50%;	
+	margin-top: -15px;
+	cursor: pointer;
+	opacity: .2;
+	transition:opacity .5s;
+}
+
+#slide1:checked ~ .side-controls label:nth-of-type(6),
+#slide2:checked ~ .side-controls label:nth-of-type(1),
+#slide3:checked ~ .side-controls label:nth-of-type(2),
+#slide4:checked ~ .side-controls label:nth-of-type(3),
+#slide5:checked ~ .side-controls label:nth-of-type(4),
+#slide6:checked ~ .side-controls label:nth-of-type(5) {
+	left: -40px;
+	border-right: 40px solid #000;
+}
+#slide1:checked ~ .side-controls label:nth-of-type(2),
+#slide2:checked ~ .side-controls label:nth-of-type(3),
+#slide3:checked ~ .side-controls label:nth-of-type(4),
+#slide4:checked ~ .side-controls label:nth-of-type(5),
+#slide5:checked ~ .side-controls label:nth-of-type(6),
+#slide6:checked ~ .side-controls label:nth-of-type(1) {
+	right: -40px;
+	border-left: 40px solid #000;
+}
+.slider {
+	background-color: #000;
+}
+.container > input {
+	display:none;
+}
+
+#slide2:checked ~ .slider .captions .c2,
+#slide1:checked ~ .slider .captions .c1,
+#slide3:checked ~ .slider .captions .c3,
+#slide4:checked ~ .slider .captions .c4,
+#slide5:checked ~ .slider .captions .c5,
+#slide6:checked ~ .slider .captions .c6 {
+	text-shadow: 0 0 0 rgba(255,255,255,.9)
+}
+.mid{
+	width: 1300px;
+	height: 1370px;
+	background-color: grey;
+	margin: 0 auto;
+	margin-top: 150px;
+	border-radius: 20px;
+	background-image: url(image/mid.jpg);
+	background-size: 100% 100%;
+	box-shadow: 0 14px 20px rgba(0,0,0,.5);
+	overflow: hidden;
+}
+#mid0{
+	width: 40px;
+	height: 570px;
+	background-image: url(image/background.png);
+	margin-top: 50px;
+	border:4px solid #fff;
+	border-radius: 20px;
+	box-shadow:  0 7px 20px rgba(0,0,0,1);
+}
+#mid0 p{
+	font-size: 27px;
+	line-height: 27px;
+	font-weight: 600;
+	font-family: "楷体";
+	color: #e2e1e4;
+	text-align: center;
+}
+#mid1{
+	position: relative;
+	background-color: #bcae96;
+	width: 140px;
+	height: 210px;
+	margin-left: 100px;
+	margin-top: -400px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid1:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid2{
+	position: relative;
+	background-color: #862d29;
+	width: 140px;
+	height: 210px;
+	margin-left: 240px;
+	margin-top: -60px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid2:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid3{
+	position: relative;
+	background-color: #ad8985;
+	width: 140px;
+	height: 210px;
+	margin-left: 320px;
+	margin-top: -420px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid3:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid4{
+	position: relative;
+	background-color: #46517f;
+	width: 140px;
+	height: 210px;
+	margin-left: 460px;
+	margin-top: -260px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid4:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid5{
+	position: relative;
+	background-color: #959ebd;
+	width: 140px;
+	height: 210px;
+	margin-left: 460px;
+	margin-top: 0px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid5:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid6{
+	position: relative;
+	background-color: #b03131;
+	width: 140px;
+	height: 210px;
+	margin-left: 600px;
+	margin-top: -250px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid6:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid7{
+	position: relative;
+	background-color: #82a48d;
+	width: 140px;
+	height: 210px;
+	margin-left: 740px;
+	margin-top: -350px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid7:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid8{
+	position: relative;
+	background-color: #986f65;
+	width: 140px;
+	height: 210px;
+	margin-left: 830px;
+	margin-top: 0px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid8:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid9{
+	position: relative;
+	background-color: #b03232;
+	width: 140px;
+	height: 210px;
+	margin-left: 970px;
+	margin-top: -180px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid9:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+#mid10{
+	position: relative;
+	background-color: #959dbc;
+	width: 140px;
+	height: 210px;
+	margin-left: 1110px;
+	margin-top: -350px;
+	text-align: center;
+	color: #fff;
+	font-weight: 600;
+	cursor:pointer;
+	border:2px solid #eee;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+    background-position: -220px -220px, 0 0;
+    background-image: -webkit-linear-gradient( top left, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 37%, rgba(255, 255, 255, 0.8) 45%, rgba(255, 255, 255, 0.0) 50%);
+    background-size: 250% 250%, 100% 100%;
+    transition: background-position 0s ease;
+}
+#mid10:hover{
+	box-shadow:  0px 0px 30px rgba(0,0,0,1);
+	transition: 0.3s;
+	z-index: 1;
+	transform: translate(0%, 0%) scale(1.03);
+    background-position: 0 0, 0 0;
+    transition-duration: 0.9s;
+}
+
+#midL{
+	width: 700px;
+	height: 300px;
+	margin-top: 300px;
+	margin-left: -100px;
+}
+#midlable{
+	width: 400px;
+	height: 50px;
+	margin-top: -20px;
+	position: relative;
+	z-index: 1;
+	color: black;
+	font-family: "楷体";
+	text-align: center;
+}
+#midlable1{
+	width: 600px;
+	height: 180px;
+	position: relative;
+	text-indent: 2em;
+	line-height: 27px;
+	margin-left: 20px;
+	z-index: 1;
+}
+#midL1{
+	width: 750px;
+	height: 350px;
+	float: right;
+	position: relative;
+	margin-top: -270px;
+	margin-right: -50px;
+}
+#midlable2{
+	width: 450px;
+	height: 100px;
+	float: right;
+	margin-top: -550px;
+	margin-right: -650px;
+	font-family: "楷体";
+}
+#midlable3{
+	width: 600px;
+	height: 180px;
+	float: right;
+	margin-top: -450px;
+	margin-right:-650px; 
+	text-indent: 2em;
+	line-height: 27px;
+}
+#mid1.move,
+#mid3.move,
+#mid4.move,
+#mid7.move,
+#mid10.move,
+#midL.move{
+    animation: movefromtop 2s;
+    animation-fill-mode: forwards;
+}
+#mid2.move,
+#mid5.move,
+#mid6.move,
+#mid8.move,
+#mid9.move,
+#midL1.move{
+    animation: movefrombottom 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes movefromtop {
+    from {
+        opacity: 0;
+        transform: translateY(-50%);
+            }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+            }
+}
+
+@keyframes movefrombottom {
+    from {
+        opacity: 0;
+        transform: translateY(50%);
+            }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+            }
+}
+.midd{
+	background-image: url(image/middbackground.jpg);
+	width: 1300px;
+	height: 1200px;
+	margin: 0 auto;
+	margin-top: 170px;
+	position: relative;
+	border-radius: 20px;
+}
+.midd1{
+	width: 350px;
+	height: 650px;
+	position: absolute;
+	margin-top: 70px;
+	margin-left: 70px;
+}
+.midd1s{
+	text-align: center;
+	font-size: 30px;
+	width: 200px;
+	height: 50px;
+	margin-top: -30px;
+	font-family: "楷体";
+	font-weight: 600;
+}
+.midd1ss{
+	width: 320px;
+	height: 250px;
+	margin-top: 40px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+.mid1sss{
+	margin-top: 40px;
+	font-weight: 600;
+	line-height: 25px;
+	width: 90%;
+}
+.midd2{
+	width: 350px;
+	height: 650px;
+	position: absolute;
+	margin-top: 70px;
+	margin-left: 470px;
+}
+.midd2s{
+	font-size: 30px;
+	width: 200px;
+	height: 50px;
+	margin-top: -30px;
+	font-family: "楷体";
+	font-weight: 600;
+}
+.midd2ss{
+	width: 350px;
+	height: 192px;
+	margin-top: 20px;
+	border-bottom: 1px dashed black;
+}
+.midd2ss p1{
+	font-weight: 600;
+}
+.midd2sss{
+	width: 350px;
+	height: 192px;
+	border-bottom: 1px dashed black;
+}
+.midd2sss p1{
+	font-weight: 600;
+}
+.midd2ssss{
+	width: 350px;
+	height: 196px;
+	border-bottom: 1px dashed black;
+}
+.midd2ssss p1{
+	font-weight: 600;
+}
+.midd3{
+	width: 350px;
+	height: 650px;
+	position: absolute;
+	margin-top: 70px;
+	margin-left: 870px;
+}
+.midd3s{
+	text-align: center;
+	font-size: 30px;
+	width: 200px;
+	height: 50px;
+	margin-top: -30px;
+	font-family: "楷体";
+	font-weight: 600;
+}
+.midd3ss{
+	z-index: 2;
+	position: absolute;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 35px;
+}
+.midd3sss{
+	width: 320px;
+	height: 250px;
+	margin: 0 auto;
+	cursor: pointer;
+	margin-top: 85px;
+}
+.midd4{
+	position: absolute;left: 45%;
+	width: 150px;
+	height: 50px;
+	margin-top: 800px;
+	text-align: center;
+	font-size: 30px;
+	line-height: 0px;
+	font-family: "楷体";
+	font-weight: 600;
+}
+.midd5{
+	position: absolute;left: 25%;
+	width: 50%;
+	height: 120px;
+	margin-top: 900px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+.midd5::-webkit-scrollbar{
+	width: 7px;
+	background-color: #ccccd6;
+	border-radius: 15px;
+	box-shadow:  0 3px 5px rgba(0,0,0,.7);
+}
+.midd5::-webkit-scrollbar-thumb{
+	background-color: #815c94;
+	border-radius: 15px;
+}
+.midd5 li{
+	display: block;
+}
+
+.nav {
+      overflow: hidden;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: auto;
+      height: 90px;
+      margin-top: -27.7%;
+      background-image: url(image/b4.jpg);
+      border-radius: 5px;
+      -webkit-transform: translate3d(-50%, 0, 0);
+              transform: translate3d(-50%, 0, 0);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+      border:2px solid #fff;
+      transition: 0.5s;
+      z-index: 999;
+    }
+.nav:hover{
+	margin-top: -24%;
+	transition: 0.5s;
+}
+    .nav__cb {
+      z-index: -1000;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .nav__content {
+      position: relative;
+      width: 90px;
+      height: 100%;
+      -webkit-transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+      transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+    }
+    .nav__cb:checked ~ .nav__content {
+      -webkit-transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      width: 980px;
+    }
+    .nav__items {
+      position: relative;
+      width: 1050px;
+      height: 100%;
+      padding-left: 20px;
+      padding-right: 110px;
+      list-style-type: none;
+      font-size: 0;
+    }
+    .nav__item {
+      display: inline-block;
+      vertical-align: top;
+      width: 145px;
+      text-align: center;
+      color: #cfccc9;
+      font-size: 18px;
+      line-height: 90px;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      -webkit-perspective: 1000px;
+              perspective: 1000px;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+    }
+    .nav__item:hover {
+      color: #fff;
+    }
+    .nav__item-text {
+      display: block;
+      height: 100%;
+      -webkit-transform: rotateY(-70deg);
+              transform: rotateY(-70deg);
+      opacity: 0;
+      -webkit-transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s;
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    }
+    .nav__cb:checked ~ .nav__content .nav__item-text {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+      opacity: 1;
+      -webkit-transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s;
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    }
+    .nav__item:nth-child(1) .nav__item-text {
+      -webkit-transition-delay: 0.3s;
+              transition-delay: 0.3s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(1) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__item:nth-child(2) .nav__item-text {
+      -webkit-transition-delay: 0.2s;
+              transition-delay: 0.2s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(2) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__item:nth-child(3) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(3) .nav__item-text {
+      -webkit-transition-delay: 0.2s;
+              transition-delay: 0.2s;
+    }
+    .nav__item:nth-child(4) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(4) .nav__item-text {
+      -webkit-transition-delay: 0.3s;
+              transition-delay: 0.3s;
+    }
+        .nav__item:nth-child(5) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(5) .nav__item-text {
+      -webkit-transition-delay: 0.4s;
+              transition-delay: 0.4s;
+    }
+    .nav__item:nth-child(6) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(6) .nav__item-text {
+      -webkit-transition-delay: 0.5s;
+              transition-delay: 0.5s;
+    }
+    .nav__btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 90px;
+      height: 90px;
+      padding: 36px 31px;
+      cursor: pointer;
+    }
+    .nav__btn:before, .nav__btn:after {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 4px;
+      border-radius: 2px;
+      background:#4a4035;
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s;
+      transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+    }
+    .nav__btn:before {
+      margin-bottom: 10px;
+    }
+    .nav__btn:hover:before, .nav__btn:hover:after {
+      background: #fff;
+    }
+    .nav__cb:checked ~ .nav__btn:before {
+      -webkit-transform: translateY(7px) rotate(-225deg);
+              transform: translateY(7px) rotate(-225deg);
+    }
+    .nav__cb:checked ~ .nav__btn:after {
+      -webkit-transform: translateY(-7px) rotate(225deg);
+              transform: translateY(-7px) rotate(225deg);
+    }
+
+.foot{
+	width: 100%;
+	height: 70px;
+	background:radial-gradient(grey,white);
+	margin: 0 auto;
+	margin-top: 50px;
+	border-radius: 10px;
+	box-shadow: 0 -3px 10px rgba(0,0,0,.5);
+}
+.foot1{
+	width: 170px;
+	height: 40px;
+	margin: 0 auto;
+}
+.letter {
+	animation:bounce 0.75s cubic-bezier(0.05,0,0.2,1) infinite alternate;
+	display:inline-block;
+	transform:translate3d(0,0,0);
+	margin-top:0.5em;
+	text-shadow:rgba(255,255,255,0.4) 0 0 0.05em;
+	font:normal 500 1.6rem 'Varela Round',sans-serif;
+}
+.letter:nth-child(1) {
+	animation-delay:0s;
+}
+.letter:nth-child(2) {
+	animation-delay:0.0833333333s;
+}
+.letter:nth-child(3) {
+	animation-delay:0.1666666667s;
+}
+.letter:nth-child(4) {
+	animation-delay:0.25s;
+}
+.letter:nth-child(5) {
+	animation-delay:0.3333333333s;
+}
+@keyframes bounce {
+	0% {
+	transform:translate3d(0,0,0);
+	text-shadow:rgba(255,255,255,0.4) 0 0 0.05em;
+}
+100% {
+	transform:translate3d(0,-0.7em,0);
+	text-shadow:rgba(255,255,255,0.4) 0 1em 0.35em;
+}
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+	<input type="radio" name="slides" id="slide1" checked>
+	<input type="radio" name="slides" id="slide2">
+	<input type="radio" name="slides" id="slide3">
+	<input type="radio" name="slides" id="slide4">
+	<input type="radio" name="slides" id="slide5">
+	<input type="radio" name="slides" id="slide6">
+	
+	<div class="slider">
+		<div class="img img1">
+			<div class="frag frag1"></div>
+			<div class="frag frag2"></div>
+			<div class="frag frag3"></div>
+			<div class="frag frag4"></div>
+			<div class="frag frag5"></div>
+			<div class="frag frag6"></div>
+		</div>
+		<div class="img img2">
+			<div class="frag frag1"></div>
+			<div class="frag frag2"></div>
+			<div class="frag frag3"></div>
+			<div class="frag frag4"></div>
+			<div class="frag frag5"></div>
+			<div class="frag frag6"></div>
+		</div>
+		<div class="img img3">
+			<div class="frag frag1"></div>
+			<div class="frag frag2"></div>
+			<div class="frag frag3"></div>
+			<div class="frag frag4"></div>
+			<div class="frag frag5"></div>
+			<div class="frag frag6"></div>
+		</div>
+		<div class="img img4">
+			<div class="frag frag1"></div>
+			<div class="frag frag2"></div>
+			<div class="frag frag3"></div>
+			<div class="frag frag4"></div>
+			<div class="frag frag5"></div>
+			<div class="frag frag6"></div>
+		</div>
+		<div class="img img5">
+			<div class="frag frag1"></div>
+			<div class="frag frag2"></div>
+			<div class="frag frag3"></div>
+			<div class="frag frag4"></div>
+			<div class="frag frag5"></div>
+			<div class="frag frag6"></div>
+		</div>
+		<div class="img img6">
+			<div class="frag frag1"></div>
+			<div class="frag frag2"></div>
+			<div class="frag frag3"></div>
+			<div class="frag frag4"></div>
+			<div class="frag frag5"></div>
+			<div class="frag frag6"></div>
+		</div>
+	</div> <!-- koniec slidera -->
+	<div class="side-controls">
+		<label for="slide1"></label>
+		<label for="slide2"></label>
+		<label for="slide3"></label>
+		<label for="slide4"></label>
+		<label for="slide5"></label>
+		<label for="slide6"></label>
+	</div>
+	<div class="controls">
+		<label for="slide1"></label>
+		<label for="slide2"></label>
+		<label for="slide3"></label>
+		<label for="slide4"></label>
+		<label for="slide5"></label>
+		<label for="slide6"></label>
+	</div>
+</div>
+<nav class="nav">
+        <input type="checkbox" class="nav__cb" id="menu-cb" />
+        <div class="nav__content">
+            <ul class="nav__items">
+                <li class="nav__item"> <span class="nav__item-text"><a href="index.html"> 首页 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="文化和自然遗产日.html"> 文化和自然遗产日 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="新闻动态.html"> 新闻动态 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="知识窗.html"> 非遗知识窗 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="二十四节气.html"> 二十四节气 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="图集.html"> 图集 </a></span> </li>
+            </ul>
+        </div>
+        <label class="nav__btn" for="menu-cb"></label>
+</nav>
+<div class="mid">
+	<div id="mid0">
+		<p>◆国家级非物质文化遗产代表性项目名录◆</p>
+	</div>
+	<div id="mid1">
+		<img src="image/lable1.png">
+		<p>【民间文学】</p>
+	</div>
+	<div id="mid2">
+		<img src="image/lable2.png">
+		<p>【传统音乐】</p>
+	</div>
+	<div id="mid3" align="center">
+		<img src="image/lable3.png">
+		<p>【传统舞蹈】</p>
+	</div>
+	<div id="mid4">
+		<img src="image/lable4.png">
+		<p>【传统戏剧】</p>
+	</div>
+	<div id="mid5">
+		<img src="image/lable5.png">
+		<p>【曲艺】</p>
+	</div>
+	<div id="mid6">
+		<img src="image/lable6.png">
+		<p>【传统游艺】</p>
+	</div>
+	<div id="mid7">
+		<img src="image/lable7.png">
+		<p>【传统美术】</p>
+	</div>
+	<div id="mid8">
+		<img src="image/lable8.png">
+		<p>【传统技艺】</p>
+	</div>
+	<div id="mid9">
+		<img src="image/lable9.png">
+		<p>【传统医药】</p>
+	</div>
+	<div id="mid10">
+		<img src="image/lable10.png">
+		<p>【民俗】</p>
+	</div>
+	<div id="midL">
+		<img src="image/mid1.png" style="width: 700px;height: 300px;">
+	</div>
+	<div id="midlable">
+		<h1>——传统工艺振兴计划</h1>
+	</div>
+	<div id="midlable1">
+		<p>为落实党的十八届五中全会关于“构建中华优秀传统文化传承体系，加强文化遗产保护，振兴传统工艺”和《中华人民共和国国民经济和社会发展第十三个五年规划纲要》关于“制定实施中国传统工艺振兴计划”的要求，促进中国传统工艺的传承与振兴，文化部、工业和信息化部、财政部联合制定了《中国传统工艺振兴计划》，于2017年3月正式出台。</p>
+	</div>
+	<div id="midL1">
+		<img src="image/mid2.png" style="width: 750px;height: 350px;">
+	</div>
+	<div id="midlable2">
+		<h1>——中国非物质文化遗产传承人群研修研习培训计划</h1>
+	</div>
+	<div id="midlable3">
+		<p>中国非物质文化遗产传承人群研修研习培训计划旨在为非遗保护工作提供高校的学术和教学资源支持，通过组织非遗项目持有者、从业者等传承人群到高校学习专业知识、研究技艺和技术、开展交流研讨与实践，帮助非遗传承人群强基础、拓眼界、增学养，增强文化自信，提高专业技术能力和可持续发展能力，提升非遗保护传承水平。同时也丰富参与院校的学术和科研积累，完善相关学科体系建设，更好地发挥文化传承创新功能。</p>
+	</div>
+</div>
+
+
+<div class="midd">
+	<div class="midd1">
+		<div class="midd1s">
+			<img src="image/midd.png" style="z-index: 1;position: relative;float: left;margin-top: -15px;margin-left: 10px;">
+			<p>新闻动态</p>
+			<img src="image/midd2.png" style="z-index: 1;position: relative;float: left;margin-top: -75px;margin-left: 200px;">
+		</div>
+		<div class="midd1ss">
+			<img src="image/midd3.jpg" width="320px" height="250px">
+		</div>
+		<div class="mid1sss">
+			<ul>
+				<a href="#"><li>非物质文化遗产：委员会将审议新增项目申请</li></a>
+				<a href="#"><li>北京市文化和旅游局领导调研前门地区“非遗+旅游”发展情况</li></a>
+				<a href="#"><li>全国非物质文化遗产名词审定委员会召开成立大会暨第一次工作会议</li></a>
+				<a href="#"><li>山东省非遗助力乡村振兴培训交流活动在日照市举办</li></a>
+				<a href="#"><li>福建省艺术馆召开2021—2022年国家级非遗代表性传承人记录工作方案论证会</li></a>
+			</ul>
+		</div>
+	</div>
+	<div class="midd2">
+		<div class="midd2s">
+			<img src="image/midd.png" style="z-index: 1;position: relative;float: left;margin-top: -15px;margin-left: 10px;">
+			<p>论坛</p>
+			<img src="image/midd2.png" style="z-index: 1;position: relative;float: left;margin-top: -75px;margin-left: 125px;">
+		</div>
+		<div class="midd2ss">
+			<a href="#"><p1>从实践探索到学科建构还须行多久——兼议非物质文化遗产的学科建设</p1></a>
+			<p>文章转载自《文化遗产》2021年第6期 </p>
+		</div>
+		<div class="midd2sss">
+			<a href="#"><p1>《格萨尔》说唱本二〇二〇年搜集整理丛书问世对史诗内容进行了有益补充</p1></a>
+			<p>由青海省格萨尔史诗保护研究中心整理编辑、青海民族出版社出版发行的《格萨尔》说唱本2020年搜集整理丛书近日出版发行。</p>
+		</div>
+		<div class="midd2ssss">
+			<a href="#"><p1>胡和平：在《关于进一步加强非物质文化遗产保护工作的意见》学习贯彻座谈会上的讲话</p1></a>
+			<p>2021年8月2日，中共中央办公厅、国务院办公厅印发《关于进一步加强非物质文化遗产保护工作的意见》（以下简称《意见》）的通知，明确了当前和今后一段时期我国非物质文化遗产保护工作的指导思想、工作原则和主要目标。</p>
+		</div>
+	</div>
+	<div class="midd3">
+		<div class="midd3s">
+			<img src="image/midd.png" style="z-index: 1;position: relative;float: left;margin-top: -15px;margin-left: 10px;">
+			<p>专题报道</p>
+			<img src="image/midd2.png" style="z-index: 1;position: relative;float: left;margin-top: -74px;margin-left: 200px;">
+		</div>
+		<div class="midd3ss">
+			<ul>
+				<a href="#"><li>走进校园、扎根群众、面向市场——​山东非遗：路越走越宽</li></a>
+				<a href="#"><li>依法保障 让青海优秀传统文化焕发新时代光彩——《青海省非物质文化遗产条例》解读</li></a>
+				<a href="#"><li>让非遗“飞”起来——宁安满族刺绣焕发时代生机</li></a>
+			</ul>
+			<div class="midd3sss">
+				<img src="image/midd4.jpg" width="320px" height="250px">
+			</div>
+		</div>
+	</div>
+	<div class="midd4">
+		<p>友情链接</p>
+		<img src="image/midd.png" style="z-index: 1;position:relative;float: left;margin-top: -60px;margin-left: -45px;">
+		<img src="image/midd2.png" style="z-index: 1;position:relative;float: left;margin-top: -55px;margin-left: 140px;">
+	</div>
+	<div class="midd5">
+		<ul>
+			<a href="#"><li>中华人民共和国文化和旅游部</li></a>
+			<a href="#"><li>国家文物局</li></a>
+			<a href="#"><li>联合国教育、科学与文化组织</li></a>
+			<a href="#"><li>联合国教科文组织亚太地区非物质文化遗产国际培训中心</li></a>
+			<a href="#"><li>联合国教科文组织亚太地区非物质文化遗产国际研究中心</li></a>
+			<a href="#"><li>联合国教科文组织亚太地区非物质文化遗产国际信息和网络中心</li></a>
+			<a href="#"><li>中国艺术研究院</li></a>
+			<a href="#"><li>中国民俗学网</li></a>
+		</ul>
+	</div>
+</div>
+<div class="foot">
+	<div class="foot1">
+		<span class="letter">👻</span>
+		<span class="letter">略</span>
+		<span class="letter">略</span>
+		<span class="letter">略</span>
+		<span class="letter">略</span>
+	</div>
+</div>
+<script type="text/javascript" src="https://repo.bfw.wiki/bfwrepo/js/prefixfree.js"></script>
+
+<script>
+    window.onload = (event) => {
+        const mid0 = document.getElementById('mid0'),
+         mid1 = document.getElementById('mid1'),
+         mid2 = document.getElementById('mid2'),
+         mid3 = document.getElementById('mid3'),
+         mid4 = document.getElementById('mid4'),
+         mid5 = document.getElementById('mid5'),
+         mid6 = document.getElementById('mid6'),
+         mid7 = document.getElementById('mid7'),
+         mid8 = document.getElementById('mid8'),
+         mid9 = document.getElementById('mid9'),
+         mid10 = document.getElementById('mid10')
+         midL = document.getElementById('midL')
+         midL1 = document.getElementById('midL1');
+        const animationClass = 'move';
+        // 创建监听
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            for (entry of entries) {
+                if (entry.intersectionRatio > 0) {
+                    addAnimationClass(entry.target, animationClass);
+                } else {
+                    console.log(animationClass);
+                    removeAnimationClass(entry.target, animationClass);
+                }
+            }
+        });
+        // 添加动画class的操作
+        function addAnimationClass(elem, animationClass) {
+            elem.className.includes(animationClass) ? 1 : elem.className = elem.className + ' ' + animationClass;
+        }
+        // 移除动画class的操作
+        function removeAnimationClass(elem, animationClass) {
+            elem.className.includes(animationClass) ? elem.className = elem.className.replace(animationClass, '') : 1;
+            console.log(elem.className);
+        }
+        // 开启监听
+        intersectionObserver.observe(mid0);
+        intersectionObserver.observe(mid1);
+        intersectionObserver.observe(mid2);
+        intersectionObserver.observe(mid3);
+        intersectionObserver.observe(mid4);
+        intersectionObserver.observe(mid5);
+        intersectionObserver.observe(mid6);
+        intersectionObserver.observe(mid7);
+        intersectionObserver.observe(mid8);
+        intersectionObserver.observe(mid9);
+        intersectionObserver.observe(mid10);
+        intersectionObserver.observe(midL);
+        intersectionObserver.observe(midL1);
+    }
+ 
+</script>
+
+</body>
+</html>
