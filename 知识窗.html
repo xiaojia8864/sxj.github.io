@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body, html { font-size: 100%; 	padding: 0; margin: 0;}
+
+/* Reset */
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+body{
+	font-weight: 500;
+	font-size: 1.05em;
+	font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+}
+a{ color: black;outline: none;text-decoration: none;-webkit-transition: 0.2s;transition: 0.2s;}
+a:hover,a:focus{color:#c04851;text-decoration: none;}
+.container{
+	margin: 0 auto;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	width: 1520px;
+  margin: 0 auto;
+  background-image: url(image/background.png);
+  background-size:100%;
+  z-index: -1;
+  
+}
+
+
+.nav {
+      overflow: hidden;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: auto;
+      height: 90px;
+      margin-top: -27.7%;
+      background-image: url(image/b4.jpg);
+      border-radius: 5px;
+      -webkit-transform: translate3d(-50%, 0, 0);
+              transform: translate3d(-50%, 0, 0);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+      border:2px solid #fff;
+      transition: 0.5s;
+      z-index: 999;
+    }
+.nav:hover{
+	margin-top: -24%;
+	transition: 0.5s;
+}
+    .nav__cb {
+      z-index: -1000;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .nav__content {
+      position: relative;
+      width: 90px;
+      height: 100%;
+      -webkit-transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+      transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+    }
+    .nav__cb:checked ~ .nav__content {
+      -webkit-transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      width:980px;
+      /*设置宽度*/
+    }
+    .nav__items {
+      position: relative;
+      width: 1050px;
+      /*设置菜单栏宽度*/
+      height: 100%;
+      padding-left: 20px;
+      padding-right: 110px;
+      list-style-type: none;
+      font-size: 0;
+    }
+    .nav__item {
+      display: inline-block;
+      vertical-align: top;
+      width: 145px;
+      text-align: center;
+      color: #cfccc9;
+      font-size: 18px;
+      line-height: 90px;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      -webkit-perspective: 1000px;
+              perspective: 1000px;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .nav__item:hover {
+      color: #fff;
+    }
+    .nav__item-text {
+      display: block;
+      height: 100%;
+      -webkit-transform: rotateY(-70deg);
+              transform: rotateY(-70deg);
+      opacity: 0;
+      -webkit-transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s;
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    }
+    .nav__cb:checked ~ .nav__content .nav__item-text {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+      opacity: 1;
+      -webkit-transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s;
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    }
+    .nav__item:nth-child(1) .nav__item-text {
+      -webkit-transition-delay: 0.5s;
+              transition-delay: 0.5s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(1) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__item:nth-child(2) .nav__item-text {
+      -webkit-transition-delay: 0.4s;
+              transition-delay: 0.4s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(2) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__item:nth-child(3) .nav__item-text {
+      -webkit-transition-delay: 0.3s;
+              transition-delay: 0.3s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(3) .nav__item-text {
+      -webkit-transition-delay: 0.2s;
+              transition-delay: 0.2s;
+    }
+    .nav__item:nth-child(4) .nav__item-text {
+      -webkit-transition-delay: 0.2s;
+              transition-delay: 0.2s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(4) .nav__item-text {
+      -webkit-transition-delay: 0.3s;
+              transition-delay: 0.3s;
+    }
+    .nav__item:nth-child(5) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(5) .nav__item-text {
+      -webkit-transition-delay: 0.4s;
+              transition-delay: 0.4s;
+    }
+    .nav__item:nth-child(6) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(6) .nav__item-text {
+      -webkit-transition-delay: 0.5s;
+              transition-delay: 0.5s;
+    }
+    .nav__btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 90px;
+      height: 90px;
+      padding: 36px 31px;
+      cursor: pointer;
+    }
+    .nav__btn:before, .nav__btn:after {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 4px;
+      border-radius: 2px;
+      background:#4a4035;
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s;
+      transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+    }
+    .nav__btn:before {
+      margin-bottom: 10px;
+    }
+    .nav__btn:hover:before, .nav__btn:hover:after {
+      background: #fff;
+    }
+    .nav__cb:checked ~ .nav__btn:before {
+      -webkit-transform: translateY(7px) rotate(-225deg);
+              transform: translateY(7px) rotate(-225deg);
+    }
+    .nav__cb:checked ~ .nav__btn:after {
+      -webkit-transform: translateY(-7px) rotate(225deg);
+              transform: translateY(-7px) rotate(225deg);
+    }
+
+    #top{
+      width: 220px;
+      height: 90px;
+      background-image: url(image/mid.jpg);
+      position: relative;
+      margin-top: 5%;
+      margin-left: 42.5%;
+      border:2px solid #fff;
+      border-radius: 10px;
+      box-shadow:  0 5px 7px rgba(0,0,0,1);
+    }
+    #top p{
+      font-size: 27px;
+      font-weight: 600;
+      color: black;
+      text-align: center;
+      font-family: "楷体";
+    }
+    #top.move {
+            animation: movefromleft 1.5s;
+            animation-fill-mode: forwards;
+        }
+ 
+        @keyframes movefromleft {
+            from {
+                opacity: 0;
+                transform: translateX(-10%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.row {
+  display: -webkit-box;
+  display: flex;
+  margin-top: 80px;
+  margin-right: 15px;
+}
+.row .col {
+  -webkit-box-flex: 1;
+          flex: 1;
+}
+.row .col:last-child {
+  margin-left: 1em;
+}
+
+/* Accordion styles */
+.tabs {
+  border-radius: 15px;
+  margin: 0 auto;
+  width: 90%;
+  overflow: hidden;
+  box-shadow: 0 7px 7px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tab {
+  width: 100%;
+  color: black;
+  overflow: hidden;
+}
+.tab-label {
+  margin-top: 3px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  padding: 1em;
+  background: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  /* Icon */
+}
+/*.tab-label:hover {
+  background: #1a252f;
+}*/
+.tab-label::after {
+  content: "\276F";
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  -webkit-transition: all .35s;
+  transition: all .35s;
+}
+.tab-content {
+  max-height: 0;
+  padding: 0 1em;
+  background-image: url(image/3.jpg);
+  background-size: 100%;
+  color: #2c3e50;
+  -webkit-transition: all .35s;
+  transition: all .35s;
+  overflow: hidden;
+  line-height: 26px;
+  text-indent: 2em;
+}
+
+input:checked + .tab-label {
+  background: #1a252f;
+}
+input:checked + .tab-label::after {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+input:checked ~ .tab-content {
+  max-height: 100vh;
+  padding: 1em;
+}
+
+.foot{
+  width: 100%;
+  height: 70px;
+  background:radial-gradient(grey,white);
+  margin: 0 auto;
+  margin-top: 50px;
+  border-radius: 10px;
+  box-shadow: 0 -3px 10px rgba(0,0,0,.5);
+}
+.foot1{
+  width: 170px;
+  height: 40px;
+  margin: 0 auto;
+}
+.letter {
+  animation:bounce 0.75s cubic-bezier(0.05,0,0.2,1) infinite alternate;
+  display:inline-block;
+  transform:translate3d(0,0,0);
+  margin-top:0.5em;
+  text-shadow:rgba(255,255,255,0.4) 0 0 0.05em;
+  font:normal 500 1.6rem 'Varela Round',sans-serif;
+}
+.letter:nth-child(1) {
+  animation-delay:0s;
+}
+.letter:nth-child(2) {
+  animation-delay:0.0833333333s;
+}
+.letter:nth-child(3) {
+  animation-delay:0.1666666667s;
+}
+.letter:nth-child(4) {
+  animation-delay:0.25s;
+}
+.letter:nth-child(5) {
+  animation-delay:0.3333333333s;
+}
+@keyframes bounce {
+  0% {
+  transform:translate3d(0,0,0);
+  text-shadow:rgba(255,255,255,0.4) 0 0 0.05em;
+}
+100% {
+  transform:translate3d(0,-0.7em,0);
+  text-shadow:rgba(255,255,255,0.4) 0 1em 0.35em;
+}
+}
+</style>
+
+</head>
+<body>
+
+
+<nav class="nav">
+        <input type="checkbox" class="nav__cb" id="menu-cb" />
+        <div class="nav__content">
+            <ul class="nav__items">
+                <li class="nav__item"> <span class="nav__item-text"><a href="index.html"> 首页 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="文化和自然遗产日.html"> 文化和自然遗产日 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="新闻动态.html"> 新闻动态 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="知识窗.html"> 非遗知识窗 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="二十四节气.html"> 二十四节气 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="图集.html"> 图集 </a></span> </li>
+            </ul>
+        </div>
+        <label class="nav__btn" for="menu-cb"></label>
+    </nav>
+
+<div id="top">
+  <p>知识窗</p>
+  <img src="image/midd.png" style="z-index: 1;position: relative;float: left;margin-top: -75px;margin-left: 0px;">
+  <img src="image/midd2.png" style="z-index: 1;position: relative;float: right;margin-top: -70px;margin-left: 125px;">
+</div>
+
+    <div class="row">
+      <div class="col">
+        <div class="tabs">
+          <div class="tab">
+            <input type="radio" id="rd1" name="rd">
+            <a href="#"><label class="tab-label" for="rd1">01 —— 什么是非物质文化遗产</label></a>
+              <div class="tab-content">
+                <p>《中华人民共和国非物质文化遗产法》所称非物质文化遗产，是指各族人民世代相传并视为其文化遗产组成部分的各种传统文化表现形式，以及与传统文化表现形式相关的实物和场所。包括：
+                <br>一、传统口头文学以及作为其载体的语言；
+                <br>二、传统美术、书法、音乐、舞蹈、戏剧、曲艺和杂技；
+                <br>三、传统技艺、医药和历法；
+                <br>四、传统礼仪、节庆等民俗；
+                <br>五、传统体育和游艺；
+                <br>六、其他非物质文化遗产。
+                <br>属于非物质文化遗产组成部分的实物和场所，凡属文物的，适用《中华人民共和国文物保护法》的有关规定。
+                <br>来源：《中华人民共和国非物质文化遗产法》(中华人民共和国主席令第四十二号)</p>
+                <p>联合国教科文组织《保护非物质文化遗产公约》中所称非物质文化遗产，指被各社区、群体，有时是个人，视为其文化遗产组成部分的各种社会实践、观念表述、表现形式、知识、技能以及相关的工具、实物、手工艺品和文化场所。这种非物质文化遗产世代相传，在各社区和群体适应周围环境以及与自然和历史的互动中，被不断地再创造，为这些社区和群体提供认同感和持续感，从而增强对文化多样性和人类创造力的尊重。在《保护非物质文化遗产公约》中，只考虑符合现有的国际人权文件，各社区、群体和个人之间相互尊重的需要和顺应可持续发展的非物质文化遗产，包括以下方面：
+                <br>一、口头传统和表现形式，包括作为非物质文化遗产媒介的语言；
+                <br>二、表演艺术；
+                <br>三、社会实践、仪式、节庆活动；
+                <br>四、有关自然界和宇宙的知识和实践；
+                <br>五、传统手工艺。
+                <br>来源：《保护非物质文化遗产公约》</p>
+              </div>
+          </div>
+          <div class="tab">
+          <input type="radio" id="rd2" name="rd">
+          <a href="#"><label class="tab-label" for="rd2">02 —— 《保护非物质文化遗产公约》中对于“保护”的九项措施指什么</label></a>
+            <div class="tab-content">
+              <p>“保护”指确保非物质文化遗产生命力的各种措施，包括这种遗产各个方面的确认、立档、研究、保存、保护、宣传、弘扬、传承（特别是通过正规和非正规教育）和振兴。</p>
+              <p>来源：《保护非物质文化遗产公约》</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd3" name="rd">
+          <a href="#"><label class="tab-label" for="rd3">03 —— 非物质文化遗产的保护主体是什么</label></a>
+            <div class="tab-content">
+              <p>非物质文化遗产的保护主体，指负有保护责任、从事保护工作的国际组织、各国政府相关机构、团体和社会有关部门及个人。它包括国际组织、国家政府、各级各类非物质文化遗产保护机构、社区与民众。</p>
+              <p>来源：王文章.非物质文化遗产概论（修订版）.北京：教育科学出版社,2013.</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd4" name="rd">
+          <a href="#"><label class="tab-label" for="rd4">04 —— 非物质文化遗产的传承主体是什么</label></a>
+            <div class="tab-content">
+              <p>非物质文化遗产的传承主体，是指某一项非物质文化遗产的优秀传承人或传承群体，即代表某项遗产深厚的民族民间文化传统，掌握着某项非物质文化遗产的知识、技艺、技术，并且具有最高水准，具有公认的代表性、权威性与影响力的个人或群体。</p>
+              <p>来源：王文章.非物质文化遗产概论（修订版）.北京：教育科学出版社,2013.</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd5" name="rd">
+          <a href="#"><label class="tab-label" for="rd5">05 —— 我国非物质文化遗产保护工作的指导方针是什么</label></a>
+            <div class="tab-content">
+              <p>保护为主、抢救第一、合理利用、传承发展。正确处理保护和利用的关系，坚持非物质文化遗产保护的真实性和整体性，有效保护的前提下合理利用，防止对非物质文化遗产的误解、歪曲或滥用。在科学认定的基础上，采取有力措施，使非物质文化遗产在全社会得到确认、尊重和弘扬。</p>
+              <p>来源：《国务院办公厅关于加强我国非物质文化遗产保护工作的意见》（国办发〔2005〕18号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd6" name="rd">
+          <a href="#"><label class="tab-label" for="rd6">06 —— 我国非物质文化遗产保护工作原则是什么</label></a>
+            <div class="tab-content">
+              <p>政府主导、社会参与，明确职责、形成合力;长远规划、分步实施，点面结合、讲求实效。</p>
+              <p>来源：《国务院办公厅关于加强我国非物质文化遗产保护工作的意见》（国办发〔2005〕18号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd7" name="rd">
+          <a href="#"><label class="tab-label" for="rd7">07 —— 什么是国家级文化生态保护区</label></a>
+            <div class="tab-content">
+              <p>国家级文化生态保护区是指以保护非物质文化遗产为核心，对历史文化积淀丰厚、存续状态良好，具有重要价值和鲜明特色的文化形态进行整体性保护，并经文化和旅游部同意设立的特定区域。</p>
+              <p>来源：国家级文化生态保护区管理办法（中华人民共和国文化和旅游部令第1号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd8" name="rd">
+          <a href="#"><label class="tab-label" for="rd8">08 —— 什么是非物质文化遗产生产性保护</label></a>
+            <div class="tab-content">
+              <p>非物质文化遗产生产性保护是指在具有生产性质的实践过程中，以保持非物质文化遗产的真实性、整体性和传承性为核心，以有效传承非物质文化遗产技艺为前提，借助生产、流通、销售等手段，将非物质文化遗产及其资源转化为文化产品的保护方式。目前，这一保护方式主要是在传统技艺、传统美术和传统医药药物炮制类非物质文化遗产领域实施。</p>
+              <p>来源：《文化部关于加强非物质文化遗产生产性保护的指导意见》（文非遗发〔2012〕4号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd9" name="rd">
+          <a href="#"><label class="tab-label" for="rd9">09 —— 国家级非物质文化遗产代表性项目名录的分类</label></a>
+            <div class="tab-content">
+              <p>2006年5月，国务院公布了第一批国家级非物质文化遗产名录，分为民间文学、民间音乐、民间舞蹈、传统戏剧、曲艺、杂技与竞技、民间美术、传统手工技艺、传统医药、民俗十大门类。
+              <br>2008年6月，国务院公布了第二批国家级非物质文化遗产名录和第一批国家级非物质文化遗产扩展项目名录，将十大门类调整为：民间文学，传统音乐，传统舞蹈，传统戏剧，曲艺，传统体育、游艺与杂技，传统美术，传统技艺，传统医药和民俗。此后国务院公布的第三批国家级非物质文化遗产名录和第四批国家级非物质文化遗产代表性项目名录沿用了调整后的类别名称。</p>
+              <p>来源：《国务院关于公布第一批国家级非物质文化遗产名录的通知》（国发〔2006〕18号）、《国务院关于公布第二批国家级非物质文化遗产名录和第一批国家级非物质文化遗产扩展项目名录的通知》（国发〔2008〕19号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd10" name="rd">
+          <a href="#"><label class="tab-label" for="rd10">10 —— “国家级非物质文化遗产名录”何时调整为“国家级非物质文化遗产代表性项目名录”</label></a>
+            <div class="tab-content">
+              <p>2014年11月，国务院印发《国务院关于公布第四批国家级非物质文化遗产代表性项目名录的通知》，该文件指出，按照《中华人民共和国非物质文化遗产法》的表述，将“国家级非物质文化遗产名录”名称调整为“国家级非物质文化遗产代表性项目名录”。由此，在工作实践中，“国家级非物质文化遗产项目代表性传承人”也相应调整为“国家级非物质文化遗产代表性项目代表性传承人”。</p>
+              <p>来源：《国务院关于公布第四批国家级非物质文化遗产代表性项目名录的通知》（国发〔2014〕59号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd11" name="rd">
+          <a href="#"><label class="tab-label" for="rd11">11 —— “文化遗产日”与“文化和自然遗产日”的关联</label></a>
+            <div class="tab-content">
+              <p>2005年12月，国务院印发《国务院关于加强文化遗产保护的通知》，该文件指出，为了进一步加强我国文化遗产保护，继承和弘扬中华民族优秀传统文化，推动社会主义先进文化建设，国务院决定从2006年起，每年六月的第二个星期六为我国的“文化遗产日”。从2006年6月至2016年6月，“文化遗产日”共走过11个年头。
+              <br>2016年9月，国务院印发《国务院关于同意设立“文化和自然遗产日”的批复》，同意自2017年起，将每年6月第二个星期六的“文化遗产日”，调整设立为“文化和自然遗产日”。2017年6月10日，成为我国第一个“文化和自然遗产日”。</p>
+              <p>来源：《国务院关于加强文化遗产保护的通知》（国发〔2005〕42号）、《国务院关于同意设立“文化和自然遗产日”的批复》（国函〔2016〕162号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd12" name="rd">
+          <a href="#"><label class="tab-label" for="rd12">12 —— 《中华人民共和国非物质文化遗产法》的颁布时间与基本内容</label></a>
+            <div class="tab-content">
+              <p>《中华人民共和国非物质文化遗产法》（以下简称《非遗法》）由中华人民共和国第十一届全国人民代表大会常务委员会第十九次会议于2011年2月25日通过并公布，自2011年6月1日起施行。《非遗法》包括总则、非物质文化遗产的调查、非物质文化遗产代表性项目名录、非物质文化遗产的传承与传播、法律责任以及附则共6章，总计45条。
+              <br>《非遗法》是我国非物质文化保护领域的一部基本法律，它的制定、颁布和实施，表明我国的非物质文化遗产保护工作迈入了依法保护的新阶段，是非物质文化遗产保护工作史上的一个标志性事件。</p>
+              <p>来源: 《中华人民共和国非物质文化遗产法》(中华人民共和国主席令第四十二号)</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd13" name="rd">
+          <a href="#"><label class="tab-label" for="rd13">13 —— 我国非物质文化遗产保护的“三项制度”</label></a>
+            <div class="tab-content">
+              <p>《中华人民共和国非物质文化遗产法》规定了非物质文化遗产保护的“三项制度”，分别是调查制度、代表性项目名录制度、传承与传播制度。</p>
+              <p>来源：《中华人民共和国非物质文化遗产法》(中华人民共和国主席令第四十二号)</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd14" name="rd">
+          <a href="#"><label class="tab-label" for="rd14">14 —— 《中华人民共和国非物质文化遗产法》正式颁布前，我国非物质文化遗产保护领域的立法实践有哪些</label></a>
+            <div class="tab-content">
+              <p>在《中华人民共和国非物质文化遗产法》（以下简称《非遗法》）正式颁布前，国家层面已有多项法律、法规涉及非物质文化遗产保护工作，以下介绍几个主要文件：
+              <br>1997年5月，国务院颁布了《传统工艺美术保护条例》（以下简称《条例》），为保护我国传统工艺美术提供了法规依据。《条例》对“传统工艺美术”的定义是，“百年以上，历史悠久，技艺精湛，世代相传，有完整的工艺流程，采用天然原材料制作，具有鲜明的民族风格和地方特色，在国内外享有声誉的手工艺品种和技艺。”《条例》颁布后，保护了一大批传统工艺美术品种，命名了国家级“工艺美术大师”，增强了全社会对传统文化遗产的保护意识。应该说，在《非遗法》颁布前，《条例》是非物质文化遗产保护领域比较重要的一部法规文件。
+              <br>2005年3月，国务院办公厅印发《关于加强我国非物质文化遗产保护工作的意见》（以下简称《意见》），确定了非物质文化遗产保护工作的目标、指导方针和原则。《意见》的核心内容是建立名录体系，逐步形成有中国特色的非物质文化遗产保护制度。
+              <br>2006年10月，文化部印发《国家级非物质文化遗产保护与管理暂行办法》（以下简称《办法之一》），作为与上述国务院办公厅的《意见》相配套的部门规章，进一步细化了《意见》的有关内容，对国家级非物质文化遗产名录项目的保护单位、代表性传承人以及管理措施等，提出了具体要求；明确规定了国务院文化行政部门、省级政府文化行政部门和县级政府文化行政部门的各自职责，保护单位的条件和职责，代表性传承人的条件等内容。
+              <br>2008年6月，文化部印发《国家级非物质文化遗产项目代表性传承人认定与管理暂行办法》（以下简称《办法之二》），作为与国务院办公厅《意见》相配套、与文化部《办法之一》相衔接的部门规章，进一步细化了上述两个文件中有关传承人的内容，对认定国家级非物质文化遗产项目代表性传承人的规则、传承人的条件、传承人申请和审批的程序、传承人的义务、撤销传承人资格的办法等内容，作了明确规定。
+              <br>我国非物质文化遗产保护工作以《意见》、《办法之一》、《办法之二》等文件为制度框架，以非遗名录和非遗传承人的申报、评选、管理为基础，逐步建立和完善保护制度与传承系统，使我国的非物质文化遗产保护工作沿着法制化的轨道健康有序进行。</p>
+              <p>来源：王文章.非物质文化遗产概论（修订版）.北京：教育科学出版社,2013.</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd15" name="rd">
+          <a href="#"><label class="tab-label" for="rd15">15 —— 联合国教科文组织在非物质文化遗产保护领域的立法实践有哪些</label></a>
+            <div class="tab-content">
+              <p>1972年，联合国教科文组织大会通过了《保护世界文化遗产和自然遗产公约》（Convention Concerning the Protection of the World Cultural and Natural Heritage，以下简称《世界遗产公约》），主要包括文化遗产和自然遗产的定义、文化和自然遗产的国家保护和国际保护措施等条款。
+              <br>《世界遗产公约》中所说的“文化遗产”主要是指文物、建筑群、遗址等物质文化遗产。但它强调，这些物质文化遗产必须“从历史、艺术和科学观点来看具有突出的普遍价值”，这里实际已包含了某种“非物质”文化遗产的内容。可以说，《世界遗产公约》为后来保护非物质文化遗产的立法工作准备了基础。
+              <br>《世界遗产公约》首次在国际社会以国际法形式规定文化遗产的保护，极大地推动了世界各国对文化遗产的保护意识。1989年11月，联合国教科文组织大会通过了《保护民间创作建议案》（Recommendation on the Safeguarding of Traditional Culture and Folklore，以下简称《建议案》），从“民间创作”的定义、鉴别、保存、保护、传播、维护和国际合作七个方面做出规定。尽管《建议案》仍使用“Folklore”（民间创作或民俗等）这个概念，但其内涵与“非物质文化遗产”概念已经基本一致。
+              <br>1998年11月，联合国教科文组织审议通过了《教科文组织宣布“人类口头和非物质遗产代表作”条例》（Regulations Relating to the Proclamation by UNESCO of Masterpieces of the Oral and Intangible Heritage of Humanity，以下简称《条例》），并于2001年公布了第一批“人类口头和非物质遗产代表作”，在全世界产生重大影响。《条例》直接沿用《建议案》对“民间创作”的界定作为“人类口头和非物质遗产”概念的定义，这标志着“非物质文化遗产”的内涵在联合国法律文件中的逐步明确和定型，也说明了联合国各相关文件之间的衔接关系。
+              <br>2003年10月，联合国教科文组织通过了《保护非物质文化遗产公约》（Convention for the Safeguarding of the Intangible Cultural Heritage，以下简称《公约》），成为非物质文化保护领域最重要的国际法文件，也是《世界遗产公约》的重要补充，中国已于2004年8月正式加入该《公约》。</p>
+              <p>来源：王文章.非物质文化遗产概论（修订版）.北京：教育科学出版社,2013.</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd16" name="rd">
+          <a href="#"><label class="tab-label" for="rd16">16 —— “人类口头和非物质遗产代表作”与“人类非物质文化遗产代表作”的关系</label></a>
+            <div class="tab-content">
+              <p>联合国教科文组织《保护非物质文化遗产公约》的过渡条款中指出：委员会应把在本公约生效前宣布为“人类口头和非物质遗产代表作”的遗产纳入人类非物质文化遗产代表作名录。在公约生效后，将不再宣布其它任何人类口头和非物质遗产代表作。2007年5月23日，“联合国教科文组织保护非物质文化遗产政府间委员会第一届特别会议”在成都举行，委员会审议通过了将90个“人类口头和非物质遗产代表作”项目纳入人类非物质文化遗产代表作名录。</p>
+              <p>来源：《保护非物质文化遗产公约》</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd17" name="rd">
+          <a href="#"><label class="tab-label" for="rd17">17 —— 联合国教科文组织非物质文化遗产相关名录分为几个类型</label></a>
+            <div class="tab-content">
+              <p>联合国教科文组织非物质文化遗产名录（名册）分为三个类型：一是急需保护的非物质文化遗产名录；二是人类非物质文化遗产代表作名录；三是优秀实践名册，也就是最能体现《公约》原则和目标的计划、项目和活动。截至2018年底，我国共有40个项目入选上述三类名录，是入选项目最多的国家。</p>
+              <p>来源：《保护非物质文化遗产公约》</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd18" name="rd">
+          <a href="#"><label class="tab-label" for="rd18">18 —— 中国非物质文化遗产标识形式及其含义</label></a>
+            <div class="tab-content">
+              <p>中国非物质文化遗产主标识形式上方采用简体中文“中国非物质文化遗产”；下方采用汉语拼音“ZHONGGUO FEIWUZHI WENHUA YICHAN”，各民族自治地区可使用当地少数民族文字，在对外交往工作中可使用英文“CHINA INTANGIBLE CULTURAL HERITAGE”或其他文字。
+              <br>国非物质文化遗产标识外部图形为圆形，象征着循环，永不消失。内部图形为方形，与外圆对应，天圆地方，表明非物质文化遗产存在空间有极大的广阔性；图形中心造型为古陶最早出现的纹样之一鱼纹，鱼纹隐含一“文”字。“文”指非物质文化遗产，而鱼生于水，寓意中国非物质文化遗产源远流长，世代相传；图形中心，抽象的双手上下共护于“文”字，意取团结、和谐、细心呵护和保护非物质文化遗产、守护精神家园的寓意；标识图形传达出古朴和质拙感，一方面反映了非物质文化遗产的生存现状，另一方面彰显了中国政府和人民保护祖国非物质文化遗产的强烈责任心和使命感，表现出中华民族团结、奋进、向前的时代精神。主标识用于正式场合，如徽章、机构形象展示等。
+              <br>中国非物质文化遗产标识标准颜色为红色（C25M100Y100K25）和白色，可根据不同需要使用其他颜色。</p>
+              <p>来源：《文化部办公厅关于印发中国非物质文化遗产标识管理办法的通知》（办社图发〔2007〕14号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd19" name="rd">
+          <a href="#"><label class="tab-label" for="rd19">19 —— 什么是非物质文化遗产保护工作部际联席会议制度</label></a>
+            <div class="tab-content">
+              <p>根据《关于加强我国非物质文化遗产保护工作的意见》，我国的非物质文化遗产保护工作将由文化部门主管上升到政府主导，建立非物质文化遗产保护工作部际联席会议制度。部际联席会议由文化部（现文化和旅游部）、发展改革委、教育部、国家民委、财政部、建设部（现住房和城乡建设部）、旅游局（现文化和旅游部）、宗教局、文物局组成。部际联席会议办公室设在文化部，负责日常工作。后增加了科学技术部、工业和信息化部、商务部、国家中医药管理局和中国社会科学院。</p>
+              <p>来源：《关于加强我国非物质文化遗产保护工作的意见》（国办发〔2005〕18号）</p>
+            </div>
+          </div>
+
+          <div class="tab">
+          <input type="radio" id="rd20" name="rd">
+          <a href="#"><label class="tab-label" for="rd20">20 —— 什么是国家非物质文化遗产保护专项资金</label></a>
+            <div class="tab-content">
+              <p>根据《国家非物质文化遗产保护专项资金管理办法》规定，国家非物质文化遗产保护专项资金是由中央财政设立，专项用于国家非物质文化遗产管理和保护的资金。专项资金的年度预算根据国家非物质文化遗产保护工作总体规划、年度工作计划及国家财力情况核定。
+              <br>专项资金分为中央本级专项资金和中央对地方专项转移支付资金，按照开支范围分为组织管理费和保护补助费。中央本级专项资金包括文化部本级组织管理费和中央部门所属单位保护补助费，中央对地方专项转移支付资金为中央财政对各省、自治区、直辖市保护补助费。
+              <br>组织管理费是指组织开展非物质文化遗产保护工作和管理工作所发生的支出，具体包括：规划编制、调查研究、宣传出版、培训、数据库建设、咨询支出等。
+              <br>保护补助费是指补助国家级非物质文化遗产代表性项目、国家级代表性传承人、国家级文化生态保护区开展调查、记录、保存、研究、传承、传播等保护性活动发生的支出。具体包括：1.国家级非物质文化遗产代表性项目补助费，主要补助国家级非物质文化遗产代表性项目相关的调查研究、抢救性记录和保存、传承活动、理论及技艺研究、出版、展示推广、民俗活动支出等。2.国家级代表性传承人补助费，用于补助国家级代表性传承人开展传习活动的支出。3.国家级文化生态保护区补助费，主要补助国家级文化生态保护区相关的调查研究、规划编制、传习设施租借或修缮、普及教育、宣传支出等。</p>
+              <p>来源：《国家非物质文化遗产保护专项资金管理办法》（财教〔2012〕45号）</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+  <div class="foot1">
+    <span class="letter">👻</span>
+    <span class="letter">略</span>
+    <span class="letter">略</span>
+    <span class="letter">略</span>
+    <span class="letter">略</span>
+  </div>
+</div>
+<script type="text/javascript" src="https://repo.bfw.wiki/bfwrepo/js/prefixfree.js"></script>
+<script>
+    window.onload = (event) => {
+        const top = document.getElementById('top');
+        const animationClass = 'move';
+        // 创建监听
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            for (entry of entries) {
+                if (entry.intersectionRatio > 0) {
+                    addAnimationClass(entry.target, animationClass);
+                } else {
+                    console.log(animationClass);
+                    removeAnimationClass(entry.target, animationClass);
+                }
+            }
+        });
+        // 添加动画class的操作
+        function addAnimationClass(elem, animationClass) {
+            elem.className.includes(animationClass) ? 1 : elem.className = elem.className + ' ' + animationClass;
+        }
+        // 移除动画class的操作
+        function removeAnimationClass(elem, animationClass) {
+            elem.className.includes(animationClass) ? elem.className = elem.className.replace(animationClass, '') : 1;
+            console.log(elem.className);
+        }
+        // 开启监听
+        intersectionObserver.observe(top);
+    }
+  </script>

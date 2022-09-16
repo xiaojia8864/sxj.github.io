@@ -1,0 +1,833 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body, html { font-size: 100%; 	padding: 0; margin: 0;}
+
+/* Reset */
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+body{
+	font-weight: 500;
+	font-size: 1.05em;
+	font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+}
+a{ color: black;outline: none;text-decoration: none;-webkit-transition: 0.2s;transition: 0.2s;}
+a:hover,a:focus{color:#c04851;text-decoration: none;}
+.container{
+	margin: 0 auto;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	width: 1520px;
+  margin: 0 auto;
+  background-image: url(image/background.png);
+  background-size:100%;
+  z-index: -1;
+  
+}
+
+
+.nav {
+      overflow: hidden;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: auto;
+      height: 90px;
+      margin-top: -28%;
+      background-image: url(image/b4.jpg);
+      border-radius: 5px;
+      -webkit-transform: translate3d(-50%, 0, 0);
+              transform: translate3d(-50%, 0, 0);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+      border:2px solid #fff;
+      transition: 0.5s;
+      z-index: 999;
+    }
+.nav:hover{
+	margin-top: -24%;
+	transition: 0.5s;
+}
+    .nav__cb {
+      z-index: -1000;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .nav__content {
+      position: relative;
+      width: 90px;
+      height: 100%;
+      -webkit-transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+      transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+    }
+    .nav__cb:checked ~ .nav__content {
+      -webkit-transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      width: 980px;
+      /*设置宽度*/
+    }
+    .nav__items {
+      position: relative;
+      width: 1050px;
+      /*设置菜单栏宽度*/
+      height: 100%;
+      padding-left: 20px;
+      padding-right: 110px;
+      list-style-type: none;
+      font-size: 0;
+    }
+    .nav__item {
+      display: inline-block;
+      vertical-align: top;
+      width: 145px;
+      text-align: center;
+      color: #cfccc9;
+      font-size: 18px;
+      line-height: 90px;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      -webkit-perspective: 1000px;
+              perspective: 1000px;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .nav__item:hover {
+      color: #fff;
+    }
+    .nav__item-text {
+      display: block;
+      height: 100%;
+      -webkit-transform: rotateY(-70deg);
+              transform: rotateY(-70deg);
+      opacity: 0;
+      -webkit-transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s;
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    }
+    .nav__cb:checked ~ .nav__content .nav__item-text {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+      opacity: 1;
+      -webkit-transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s;
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    }
+    .nav__item:nth-child(1) .nav__item-text {
+      -webkit-transition-delay: 0.5s;
+              transition-delay: 0.5s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(1) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__item:nth-child(2) .nav__item-text {
+      -webkit-transition-delay: 0.4s;
+              transition-delay: 0.4s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(2) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__item:nth-child(3) .nav__item-text {
+      -webkit-transition-delay: 0.3s;
+              transition-delay: 0.3s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(3) .nav__item-text {
+      -webkit-transition-delay: 0.2s;
+              transition-delay: 0.2s;
+    }
+    .nav__item:nth-child(4) .nav__item-text {
+      -webkit-transition-delay: 0.2s;
+              transition-delay: 0.2s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(4) .nav__item-text {
+      -webkit-transition-delay: 0.3s;
+              transition-delay: 0.3s;
+    }
+    .nav__item:nth-child(5) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(5) .nav__item-text {
+      -webkit-transition-delay: 0.4s;
+              transition-delay: 0.4s;
+    }
+    .nav__item:nth-child(6) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(6) .nav__item-text {
+      -webkit-transition-delay: 0.5s;
+              transition-delay: 0.5s;
+    }
+    .nav__btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 90px;
+      height: 90px;
+      padding: 36px 31px;
+      cursor: pointer;
+    }
+    .nav__btn:before, .nav__btn:after {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 4px;
+      border-radius: 2px;
+      background:#4a4035;
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s;
+      transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+    }
+    .nav__btn:before {
+      margin-bottom: 10px;
+    }
+    .nav__btn:hover:before, .nav__btn:hover:after {
+      background: #fff;
+    }
+    .nav__cb:checked ~ .nav__btn:before {
+      -webkit-transform: translateY(7px) rotate(-225deg);
+              transform: translateY(7px) rotate(-225deg);
+    }
+    .nav__cb:checked ~ .nav__btn:after {
+      -webkit-transform: translateY(-7px) rotate(225deg);
+              transform: translateY(-7px) rotate(225deg);
+    }
+
+    #top{
+      width: 220px;
+      height: 90px;
+      background-image: url(image/mid.jpg);
+      position: relative;
+      margin-top: 5%;
+      margin-left: 42.6%;
+      border:2px solid #fff;
+      border-radius: 10px;
+      box-shadow:  0 5px 7px rgba(0,0,0,1);
+    }
+    #top p{
+      font-size: 27px;
+      font-weight: 600;
+      color: black;
+      text-align: center;
+      font-family: "楷体";
+    }
+    #img{
+      width: 1300px;
+      height: 448px;
+      margin: 0 auto;
+      background-image: url(image/2.jpg);
+      margin-top: 50px;
+      border-radius: 10px;
+      box-shadow:  0 7px 20px rgba(0,0,0,1);
+    }
+    #lab{
+      width: 1200px;
+      height: 350px;
+      margin: 0 auto;
+      margin-top: 90px;
+      background-image: url(image/lab.jpg);
+      background-size: 100% 100%;
+    }
+    #labs{
+      width: 480px;
+      height: 280px;
+      float: left;
+      margin-top: 35px;
+      margin-left: 50px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #labs img{
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    #labs:hover img{
+       -moz-transform: scale(1.3);
+       -webkit-transform: scale(1.3);
+       transform: scale(1.1);
+    }
+    #labp{
+      width: 600px;
+      height: 60px;
+      float: left;
+      margin-left: 25px;
+      margin-top: 35px;
+      font-weight: 600;
+      border-bottom: 1px solid grey;
+    }
+    #date{
+      width: 110px;
+      height: 30px;
+      background-color: #fff;
+      float: right;
+      margin-top: -15px;
+      margin-right: 45px;
+      font-size: 14px;
+      line-height: 0px;
+      text-align: center;
+      z-index: 999;
+    }
+    #labss{
+      width: 600px;
+      height: 220px;
+      float: right;
+      margin-right: 45px;
+      line-height: 25px;
+      font-size: 16px;
+    }
+
+    #lab1{
+      width: 1200px;
+      height: 350px;
+      margin: 0 auto;
+      margin-top: 20px;
+      background-image: url(image/lab.jpg);
+      background-size: 100% 100%;
+    }
+    #lab1s{
+      width: 480px;
+      height: 280px;
+      float: left;
+      margin-top: 35px;
+      margin-left: 50px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #lab1s img{
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    #lab1s:hover img{
+       -moz-transform: scale(1.3);
+       -webkit-transform: scale(1.3);
+       transform: scale(1.1);
+    }
+    #lab1p{
+      width: 600px;
+      height: 60px;
+      float: left;
+      margin-left: 25px;
+      margin-top: 35px;
+      font-weight: 600;
+      border-bottom: 1px solid grey;
+    }
+    #date{
+      width: 110px;
+      height: 30px;
+      background-color: #fff;
+      float: right;
+      margin-top: -15px;
+      margin-right: 45px;
+      font-size: 14px;
+      line-height: 0px;
+      text-align: center;
+      z-index: 999;
+    }
+    #lab1ss{
+      width: 600px;
+      height: 220px;
+      float: right;
+      margin-right: 45px;
+      line-height: 25px;
+      font-size: 16px;
+    }
+
+    #lab2{
+      width: 1200px;
+      height: 350px;
+      margin: 0 auto;
+      margin-top: 20px;
+      background-image: url(image/lab.jpg);
+      background-size: 100% 100%;
+    }
+    #lab2s{
+      width: 480px;
+      height: 280px;
+      float: left;
+      margin-top: 35px;
+      margin-left: 50px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #lab2s img{
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    #lab2s:hover img{
+       -moz-transform: scale(1.3);
+       -webkit-transform: scale(1.3);
+       transform: scale(1.1);
+    }
+    #lab2p{
+      width: 600px;
+      height: 60px;
+      float: left;
+      margin-left: 25px;
+      margin-top: 35px;
+      font-weight: 600;
+      border-bottom: 1px solid grey;
+    }
+    #date{
+      width: 110px;
+      height: 30px;
+      background-color: #fff;
+      float: right;
+      margin-top: -15px;
+      margin-right: 45px;
+      font-size: 14px;
+      line-height: 0px;
+      text-align: center;
+      z-index: 999;
+    }
+    #lab2ss{
+      width: 600px;
+      height: 220px;
+      float: right;
+      margin-right: 45px;
+      line-height: 25px;
+      font-size: 16px;
+    }
+
+    #lab3{
+      width: 1200px;
+      height: 350px;
+      margin: 0 auto;
+      margin-top: 20px;
+      background-image: url(image/lab.jpg);
+      background-size: 100% 100%;
+    }
+    #lab3s{
+      width: 480px;
+      height: 280px;
+      float: left;
+      margin-top: 35px;
+      margin-left: 50px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #lab3s img{
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    #lab3s:hover img{
+       -moz-transform: scale(1.3);
+       -webkit-transform: scale(1.3);
+       transform: scale(1.1);
+    }
+    #lab3p{
+      width: 600px;
+      height: 60px;
+      float: left;
+      margin-left: 25px;
+      margin-top: 35px;
+      font-weight: 600;
+      border-bottom: 1px solid grey;
+    }
+    #date{
+      width: 110px;
+      height: 30px;
+      background-color: #fff;
+      float: right;
+      margin-top: -15px;
+      margin-right: 45px;
+      font-size: 14px;
+      line-height: 0px;
+      text-align: center;
+      z-index: 999;
+    }
+    #lab3ss{
+      width: 600px;
+      height: 220px;
+      float: right;
+      margin-right: 45px;
+      line-height: 25px;
+      font-size: 16px;
+    }
+
+    #lab4{
+      width: 1200px;
+      height: 350px;
+      margin: 0 auto;
+      margin-top: 20px;
+      background-image: url(image/lab.jpg);
+      background-size: 100% 100%;
+    }
+    #lab4s{
+      width: 480px;
+      height: 280px;
+      float: left;
+      margin-top: 35px;
+      margin-left: 50px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #lab4s img{
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    #lab4s:hover img{
+       -moz-transform: scale(1.3);
+       -webkit-transform: scale(1.3);
+       transform: scale(1.1);
+    }
+    #lab4p{
+      width: 600px;
+      height: 60px;
+      float: left;
+      margin-left: 25px;
+      margin-top: 35px;
+      font-weight: 600;
+      border-bottom: 1px solid grey;
+    }
+    #date{
+      width: 110px;
+      height: 30px;
+      background-color: #fff;
+      float: right;
+      margin-top: -15px;
+      margin-right: 45px;
+      font-size: 14px;
+      line-height: 0px;
+      text-align: center;
+      z-index: 999;
+    }
+    #lab4ss{
+      width: 600px;
+      height: 220px;
+      float: right;
+      margin-right: 45px;
+      line-height: 25px;
+      font-size: 16px;
+    }
+
+    #lab5{
+      width: 1200px;
+      height: 350px;
+      margin: 0 auto;
+      margin-top: 20px;
+      background-image: url(image/lab.jpg);
+      background-size: 100% 100%;
+    }
+    #lab5s{
+      width: 480px;
+      height: 280px;
+      float: left;
+      margin-top: 35px;
+      margin-left: 50px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #lab5s img{
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    #lab5s:hover img{
+       -moz-transform: scale(1.3);
+       -webkit-transform: scale(1.3);
+       transform: scale(1.1);
+    }
+    #lab5p{
+      width: 600px;
+      height: 60px;
+      float: left;
+      margin-left: 25px;
+      margin-top: 35px;
+      font-weight: 600;
+      border-bottom: 1px solid grey;
+    }
+    #date{
+      width: 110px;
+      height: 30px;
+      background-color: #fff;
+      float: right;
+      margin-top: -15px;
+      margin-right: 45px;
+      font-size: 14px;
+      line-height: 0px;
+      text-align: center;
+      z-index: 999;
+    }
+    #lab5ss{
+      width: 600px;
+      height: 220px;
+      float: right;
+      margin-right: 45px;
+      line-height: 25px;
+      font-size: 16px;
+    }
+
+    #top.move,
+    #lab.move,
+    #lab1.move,
+    #lab2.move,
+    #lab3.move,
+    #lab4.move,
+    #lab5.move {
+            animation: movefromleft 1.5s;
+            animation-fill-mode: forwards;
+        }
+ 
+        @keyframes movefromleft {
+            from {
+                opacity: 0;
+                transform: translateX(-10%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+.foot{
+  width: 100%;
+  height: 70px;
+  background:radial-gradient(grey,white);
+  margin: 0 auto;
+  margin-top: 50px;
+  border-radius: 10px;
+  box-shadow: 0 -3px 10px rgba(0,0,0,.5);
+}
+.foot1{
+  width: 170px;
+  height: 40px;
+  margin: 0 auto;
+}
+.letter {
+  animation:bounce 0.75s cubic-bezier(0.05,0,0.2,1) infinite alternate;
+  display:inline-block;
+  transform:translate3d(0,0,0);
+  margin-top:0.5em;
+  text-shadow:rgba(255,255,255,0.4) 0 0 0.05em;
+  font:normal 500 1.6rem 'Varela Round',sans-serif;
+}
+.letter:nth-child(1) {
+  animation-delay:0s;
+}
+.letter:nth-child(2) {
+  animation-delay:0.0833333333s;
+}
+.letter:nth-child(3) {
+  animation-delay:0.1666666667s;
+}
+.letter:nth-child(4) {
+  animation-delay:0.25s;
+}
+.letter:nth-child(5) {
+  animation-delay:0.3333333333s;
+}
+@keyframes bounce {
+  0% {
+  transform:translate3d(0,0,0);
+  text-shadow:rgba(255,255,255,0.4) 0 0 0.05em;
+}
+100% {
+  transform:translate3d(0,-0.7em,0);
+  text-shadow:rgba(255,255,255,0.4) 0 1em 0.35em;
+}
+}
+</style>
+
+</head>
+<body>
+
+
+<nav class="nav">
+        <input type="checkbox" class="nav__cb" id="menu-cb" />
+        <div class="nav__content">
+            <ul class="nav__items">
+                <li class="nav__item"> <span class="nav__item-text"><a href="index.html"> 首页 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="文化和自然遗产日.html"> 文化和自然遗产日 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="新闻动态.html"> 新闻动态 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="知识窗.html"> 非遗知识窗 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="二十四节气.html"> 二十四节气 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="图集.html"> 图集 </a></span> </li>
+            </ul>
+        </div>
+        <label class="nav__btn" for="menu-cb"></label>
+      </nav>
+
+<div id="top">
+  <p>新闻动态</p>
+  <img src="image/midd.png" style="z-index: 1;position: relative;float: left;margin-top: -75px;margin-left: 0px;">
+  <img src="image/midd2.png" style="z-index: 1;position: relative;float: right;margin-top: -70px;margin-left: 125px;">
+</div>
+<div id="img"></div>
+<div id="lab">
+  <div id="labs">
+    <img src="image/labs.jpg" width="480px" height="280px">
+  </div>
+  <div id="labp">
+    <a href="#"><p>2021年二十四节气保护传承工作年会暨二十四节气保护传承联盟理事会在京召开</p></a>
+  </div>
+  <div id="date">
+    <p>2021.12.20</p>
+  </div>
+  <div id="labss">
+    <p>2021年12月18日，“2021年二十四节气保护传承工作年会暨二十四节气保护传承联盟理事会”在中国农业博物馆召开。本次会议深入贯彻落实习近平总书记关于大力传承弘扬优秀传统文化重要论述和党的十九届六中全会精神，以“不忘来时路 再启新征程——构建二十四节气传承发展新格局”为主题，采取线上线下相结合的方式召开。来自文化和旅游部、农业农村部相关司局负责同志，二十四节气代表性社区和保护传承联盟成员单位负责同志共计约200人参加会议。二十四节气保护传承联盟荣誉理事长、中国社会科学院荣誉学部委员刘魁立出席会议并讲话。</p>
+  </div>
+</div>
+<div id="lab1">
+  <div id="lab1s">
+    <img src="image/lab1s.png" width="480px" height="280px">
+  </div>
+  <div id="lab1p">
+    <a href="#"><p>“共享太极•共享健康”——太极拳申遗成功一周年系列活动正式启动</p></a>
+  </div>
+  <div id="date">
+    <p>2021.12.20</p>
+  </div>
+  <div id="lab1ss">
+    <p>2020年12月17日，联合国教科文组织在牙买加首都金斯敦宣布，正式将太极拳列入人类非物质文化遗产代表作名录。有300多年历史的太极拳迎来了在世界舞台上的“高光时刻”，这标志着太极拳作为全人类的共同文化遗产，得到了世界的广泛认同。为共庆太极拳成功申遗，共商太极拳传承发展大计。全国的“太极人”欢聚在太极文化的重要传承区、太极拳发源地——陈家沟，举行太极拳申遗成功一周年系列活动。</p>
+  </div>
+</div>
+<div id="lab2">
+  <div id="lab2s">
+    <img src="image/lab2s.jpg" width="480px" height="280px">
+  </div>
+  <div id="lab2p">
+    <a href="#"><p>青海省召开2021年文化生态保护（实验）区工作推进会</p></a>
+  </div>
+  <div id="date">
+    <p>2021.12.20</p>
+  </div>
+  <div id="lab2ss">
+    <p>12月16日，青海省文化和旅游厅组织召开2021年青海省文化生态保护（实验）区工作推进会，厅党组成员、副厅长，一级巡视员吕霞出席会议并讲话。国家级、省级文化生态保护（实验）区，黄南州热贡文化生态保护区管委会，西宁市、海东市文化和旅游局、省非遗保护中心、省非遗保护协会主要负责人及省垣非遗专家参加会议。</p>
+  </div>
+</div>
+<div id="lab3">
+  <div id="lab3s">
+    <img src="image/lab3s.png" width="480px" height="280px">
+  </div>
+  <div id="lab3p">
+    <a href="#"><p>2021年荆楚民间刺绣传承人群研修班结课仪式暨结课展顺利举行</p></a>
+  </div>
+  <div id="date">
+    <p>2021.12.20</p>
+  </div>
+  <div id="lab3ss">
+    <p>12月10日，文化和旅游部、教育部、人力资源和社会保障部中国非物质文化遗产传承人研修培训计划项目，“2021年荆楚民间刺绣传承人群研修班”结课仪式暨结课展在武汉纺织大学非遗中心顺利举行。该项目由湖北省文化和旅游厅主办，武汉纺织大学具体承办实施。</p>
+  </div>
+</div>
+<div id="lab4">
+  <div id="lab4s">
+    <img src="image/lab4s.png" width="480px" height="280px">
+  </div>
+  <div id="lab4p">
+    <a href="#"><p>2021第四届非遗品牌大会（广州）线上线下融合举办</p></a>
+  </div>
+  <div id="date">
+    <p>2021.12.20</p>
+  </div>
+  <div id="lab4ss">
+    <p>12月18日，“2021第四届非遗品牌大会（广州）”在广州塔拉开帷幕，大会由广州市文化广电旅游局主办。文化和旅游部非物质文化遗产司司长王晨阳、广州市文化广电旅游局局长刘瑜梅分别发表大会致辞，多位领导、专家及传承人共同启动2021非遗品牌大会。本届非遗品牌大会以“非遗品牌力”为主题，围绕岭南文化基因，发挥粤港澳地域相近、文脉相亲的优势，积极探索湾区非遗数字经济发展潜力，从“新青年、新生活、新业态、新传播”的角度，集中展示本年度非遗品牌活力。</p>
+  </div>
+</div>
+<div id="lab5">
+  <div id="lab5s">
+    <img src="image/lab5s.png" width="480px" height="280px">
+  </div>
+  <div id="lab5p">
+    <a href="#"><p>2021中国原生民歌节在重庆渝东南开幕</p></a>
+  </div>
+  <div id="date">
+    <p>2021.12.18</p>
+  </div>
+  <div id="lab5ss">
+    <p>由文化和旅游部、重庆市人民政府主办，以“歌唱美好新生活”为主题的2021中国原生民歌节在重庆市彭水苗族土家族自治县、石柱土家族自治县、黔江区举办。12月17日，2021中国原生民歌节开幕式在彭水苗族土家族自治县举行。</p>
+  </div>
+</div>
+<div class="foot">
+  <div class="foot1">
+    <span class="letter">👻</span>
+    <span class="letter">略</span>
+    <span class="letter">略</span>
+    <span class="letter">略</span>
+    <span class="letter">略</span>
+  </div>
+</div>
+<script type="text/javascript" src="https://repo.bfw.wiki/bfwrepo/js/prefixfree.js"></script>
+<script>
+    window.onload = (event) => {
+        const top = document.getElementById('top'),
+            lab = document.getElementById('lab'),
+            lab1 = document.getElementById('lab1'),
+            lab2 = document.getElementById('lab2'),
+            lab3 = document.getElementById('lab3'),
+            lab4 = document.getElementById('lab4'),
+            lab5 = document.getElementById('lab5');
+        const animationClass = 'move';
+        // 创建监听
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            for (entry of entries) {
+                if (entry.intersectionRatio > 0) {
+                    addAnimationClass(entry.target, animationClass);
+                } else {
+                    console.log(animationClass);
+                    removeAnimationClass(entry.target, animationClass);
+                }
+            }
+        });
+        // 添加动画class的操作
+        function addAnimationClass(elem, animationClass) {
+            elem.className.includes(animationClass) ? 1 : elem.className = elem.className + ' ' + animationClass;
+        }
+        // 移除动画class的操作
+        // function removeAnimationClass(elem, animationClass) {
+        //     elem.className.includes(animationClass) ? elem.className = elem.className.replace(animationClass, '') : 1;
+        //     console.log(elem.className);
+        // }
+        // 开启监听
+        intersectionObserver.observe(top);
+        intersectionObserver.observe(lab);
+        intersectionObserver.observe(lab1);
+        intersectionObserver.observe(lab2);
+        intersectionObserver.observe(lab3);
+        intersectionObserver.observe(lab4);
+        intersectionObserver.observe(lab5);
+    }
+ 
+</script>
+</body>
+</html>

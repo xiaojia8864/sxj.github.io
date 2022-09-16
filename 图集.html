@@ -1,0 +1,745 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body, html { font-size: 100%; 	padding: 0; margin: 0;}
+
+/* Reset */
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+body{
+	font-weight: 500;
+	font-size: 1.05em;
+	font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+}
+a{ color: black;outline: none;text-decoration: none;-webkit-transition: 0.2s;transition: 0.2s;}
+a:hover,a:focus{color:#c04851;text-decoration: none;}
+.container{
+	margin: 0 auto;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	width: 1520px;
+  margin: 0 auto;
+  background-image: url(image/background.png);
+  background-size:100%;
+  z-index: -1;
+  
+}
+
+
+#top{
+      width: 220px;
+      height: 90px;
+      background-image: url(image/mid.jpg);
+      position: relative;
+      margin-top: 5%;
+      margin-left: 42.5%;
+      border:2px solid #fff;
+      border-radius: 10px;
+      box-shadow:  0 5px 7px rgba(0,0,0,1);
+    }
+    #top p{
+      font-size: 27px;
+      font-weight: 600;
+      color: black;
+      text-align: center;
+      font-family: "楷体";
+    }
+
+.nav {
+      overflow: hidden;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: auto;
+      height: 90px;
+      margin-top: -28%;
+      background-image: url(image/b4.jpg);
+      border-radius: 5px;
+      -webkit-transform: translate3d(-50%, 0, 0);
+              transform: translate3d(-50%, 0, 0);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+      border:2px solid #fff;
+      transition: 0.5s;
+      z-index: 999;
+    }
+.nav:hover{
+	margin-top: -24%;
+	transition: 0.5s;
+}
+    .nav__cb {
+      z-index: -1000;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .nav__content {
+      position: relative;
+      width: 90px;
+      height: 100%;
+      -webkit-transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+      transition: width 1s cubic-bezier(0.49, -0.3, 0.68, 1.23);
+    }
+    .nav__cb:checked ~ .nav__content {
+      -webkit-transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: width 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      width: 980px;
+      /*设置宽度*/
+    }
+    .nav__items {
+      position: relative;
+      width: 1050px;
+      /*设置菜单栏宽度*/
+      height: 100%;
+      padding-left: 20px;
+      padding-right: 110px;
+      list-style-type: none;
+      font-size: 0;
+    }
+    .nav__item {
+      display: inline-block;
+      vertical-align: top;
+      width: 145px;
+      text-align: center;
+      color: #cfccc9;
+      font-size: 18px;
+      line-height: 90px;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      -webkit-perspective: 1000px;
+              perspective: 1000px;
+      -webkit-transition: color 0.3s;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .nav__item:hover {
+      color: #fff;
+    }
+    .nav__item-text {
+      display: block;
+      height: 100%;
+      -webkit-transform: rotateY(-70deg);
+              transform: rotateY(-70deg);
+      opacity: 0;
+      -webkit-transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s;
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.7s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    }
+    .nav__cb:checked ~ .nav__content .nav__item-text {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+      opacity: 1;
+      -webkit-transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s;
+      transition: transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5), opacity 0.2s, -webkit-transform 0.7s cubic-bezier(0.48, 0.43, 0.7, 2.5);
+    }
+    .nav__item:nth-child(1) .nav__item-text {
+      -webkit-transition-delay: 0.5s;
+              transition-delay: 0.5s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(1) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__item:nth-child(2) .nav__item-text {
+      -webkit-transition-delay: 0.4s;
+              transition-delay: 0.4s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(2) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__item:nth-child(3) .nav__item-text {
+      -webkit-transition-delay: 0.3s;
+              transition-delay: 0.3s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(3) .nav__item-text {
+      -webkit-transition-delay: 0.2s;
+              transition-delay: 0.2s;
+    }
+    .nav__item:nth-child(4) .nav__item-text {
+      -webkit-transition-delay: 0.2s;
+              transition-delay: 0.2s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(4) .nav__item-text {
+      -webkit-transition-delay: 0.3s;
+              transition-delay: 0.3s;
+    }
+    .nav__item:nth-child(5) .nav__item-text {
+      -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(5) .nav__item-text {
+      -webkit-transition-delay: 0.4s;
+              transition-delay: 0.4s;
+    }
+    .nav__item:nth-child(6) .nav__item-text {
+      -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+    }
+    .nav__cb:checked ~ .nav__content .nav__item:nth-child(6) .nav__item-text {
+      -webkit-transition-delay: 0.5s;
+              transition-delay: 0.5s;
+    }
+    .nav__btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 90px;
+      height: 90px;
+      padding: 36px 31px;
+      cursor: pointer;
+    }
+    .nav__btn:before, .nav__btn:after {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 4px;
+      border-radius: 2px;
+      background:#4a4035;
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+      transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s;
+      transition: transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3), background-color 0.3s, -webkit-transform 1s cubic-bezier(0.48, 0.43, 0.29, 1.3);
+    }
+    .nav__btn:before {
+      margin-bottom: 10px;
+    }
+    .nav__btn:hover:before, .nav__btn:hover:after {
+      background: #fff;
+    }
+    .nav__cb:checked ~ .nav__btn:before {
+      -webkit-transform: translateY(7px) rotate(-225deg);
+              transform: translateY(7px) rotate(-225deg);
+    }
+    .nav__cb:checked ~ .nav__btn:after {
+      -webkit-transform: translateY(-7px) rotate(225deg);
+              transform: translateY(-7px) rotate(225deg);
+    }
+
+    #mid{
+      width: 1220px;
+      height: 2300px;
+      position: relative;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+    #m1{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+    #m2{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-left: 410px;
+      margin-top: -350px;overflow: hidden;
+    }
+    #m3{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-left: 820px;
+      margin-top: -350px;overflow: hidden;
+    }
+    #m4{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: 20px;overflow: hidden;
+    }
+    #m5{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 410px;overflow: hidden;
+    }
+    #m6{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 820px;overflow: hidden;
+    }
+    #m7{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: 20px;
+      margin-left: 0px;overflow: hidden;
+    }
+    #m8{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 410px;overflow: hidden;
+    }
+    #m9{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 820px;overflow: hidden;
+    }
+    #m10{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: 10px;
+      margin-left: 0px;overflow: hidden;
+    }
+    #m11{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 410px;overflow: hidden;
+    }
+    #m12{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 820px;overflow: hidden;
+    }
+    #m13{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: 10px;
+      margin-left: 0px;overflow: hidden;
+    }
+    #m14{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 410px;overflow: hidden;
+    }
+    #m15{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 820px;overflow: hidden;
+    }
+    #m16{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: 10px;
+      margin-left: 0px;overflow: hidden;
+    }
+    #m17{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 410px;overflow: hidden;
+    }
+    #m18{
+      width: 400px;
+      height: 350px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+      margin-top: -350px;
+      margin-left: 820px;overflow: hidden;
+    }
+    #Mimg img{
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    #Mimg:hover img{
+       -moz-transform: scale(1.3);
+       -webkit-transform: scale(1.3);
+       transform: scale(1.1);
+    }
+
+    #top.move,
+    #m1.move,
+    #m2.move,
+    #m4.move {
+            animation: movefromleft 2s;
+            animation-fill-mode: forwards;
+        }
+ 
+        @keyframes movefromleft {
+            from {
+                opacity: 0;
+                transform: translateX(-30%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+        #m3.move,
+        #m5.move,
+        #m6.move {
+            animation: movefromright 2s;
+            animation-fill-mode: forwards;
+        }
+ 
+        @keyframes movefromright {
+            from {
+                opacity: 0;
+                transform: translateX(30%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+        #m7.move,
+        #m8.move,
+        #m9.move,
+        #m10.move,
+        #m11.move,
+        #m12.move{
+          animation: movefromscale 2s;
+          animation-fill-mode: forwards;
+        }
+        @keyframes movefromscale {
+        from {
+            opacity: 0;
+            transform: scale(0.2);
+                }
+        to {
+            opacity: 1;
+            transform: scale(1);
+                }
+    }
+
+    #m13.move,
+    #m14.move,
+    #m15.move {
+            animation: movefromtop 2s;
+            animation-fill-mode: forwards;
+        }
+ 
+        @keyframes movefromtop {
+            from {
+                opacity: 0;
+                transform: translateY(-30%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        #m16.move,
+        #m17.move,
+        #m18.move {
+            animation: movefrombottom 2s;
+            animation-fill-mode: forwards;
+        }
+ 
+        @keyframes movefrombottom {
+            from {
+                opacity: 0;
+                transform: translateY(30%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+        .foot{
+  width: 100%;
+  height: 70px;
+  background:radial-gradient(grey,white);
+  margin: 0 auto;
+  margin-top: 50px;
+  border-radius: 10px;
+  box-shadow: 0 -3px 10px rgba(0,0,0,.5);
+}
+.foot1{
+  width: 170px;
+  height: 40px;
+  margin: 0 auto;
+}
+.letter {
+  animation:bounce 0.75s cubic-bezier(0.05,0,0.2,1) infinite alternate;
+  display:inline-block;
+  transform:translate3d(0,0,0);
+  margin-top:0.5em;
+  text-shadow:rgba(255,255,255,0.4) 0 0 0.05em;
+  font:normal 500 1.6rem 'Varela Round',sans-serif;
+}
+.letter:nth-child(1) {
+  animation-delay:0s;
+}
+.letter:nth-child(2) {
+  animation-delay:0.0833333333s;
+}
+.letter:nth-child(3) {
+  animation-delay:0.1666666667s;
+}
+.letter:nth-child(4) {
+  animation-delay:0.25s;
+}
+.letter:nth-child(5) {
+  animation-delay:0.3333333333s;
+}
+@keyframes bounce {
+  0% {
+  transform:translate3d(0,0,0);
+  text-shadow:rgba(255,255,255,0.4) 0 0 0.05em;
+}
+100% {
+  transform:translate3d(0,-0.7em,0);
+  text-shadow:rgba(255,255,255,0.4) 0 1em 0.35em;
+}
+}
+
+</style>
+
+</head>
+<body>
+
+
+<nav class="nav">
+        <input type="checkbox" class="nav__cb" id="menu-cb" />
+        <div class="nav__content">
+            <ul class="nav__items">
+                <li class="nav__item"> <span class="nav__item-text"><a href="index.html"> 首页 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="文化和自然遗产日.html"> 文化和自然遗产日 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="新闻动态.html"> 新闻动态 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="知识窗.html"> 非遗知识窗 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="二十四节气.html"> 二十四节气 </a></span> </li>
+                <li class="nav__item"> <span class="nav__item-text"><a href="图集.html"> 图集 </a></span> </li>
+            </ul>
+        </div>
+        <label class="nav__btn" for="menu-cb"></label>
+    </nav>
+
+<div id="top">
+  <p>图集</p>
+  <img src="image/midd.png" style="z-index: 1;position: relative;float: left;margin-top: -75px;margin-left: 0px;">
+  <img src="image/midd2.png" style="z-index: 1;position: relative;float: right;margin-top: -70px;margin-left: 125px;">
+</div>
+<div id="mid">
+  <div id="m1">
+    <div id="Mimg"><img src="image/6m1.jpg" width="400px"></div>
+    <div id="m1ss"><a href="#"><p>二十四节气日历图集</p><p>2021.06.22</p></a></div>
+  </div>
+  <div id="m2">
+    <div id="Mimg"><img src="image/6m2.jpg" width="400px"></div>
+    <div id="m2ss"><a href="#"><p>锦绣文章——纺染织绣工艺专题展（下）</p><p>2021.06.21</p></a></div>
+  </div>
+  <div id="m3">
+    <div id="Mimg"><img src="image/6m3.jpg" width="400px" height="260px"></div>
+    <div id="m3ss"><a href="#"><p>锦绣文章——纺染织绣工艺专题展（下）</p><p>2021.06.21</p></a></div>
+  </div>
+  <div id="m4">
+    <div id="Mimg"><img src="image/6m4.jpg" width="400px"></div>
+    <div id="m4ss"><a href="#"><p>良辰美景·2019非遗演出季古琴专场（地点：中山音乐堂）</p><p>2020.01.06</p></a></div>
+  </div>
+  <div id="m5">
+    <div id="Mimg"><img src="image/6m5.jpg" width="400px"></div>
+    <div id="m5ss"><a href="#"><p>良辰美景·2019非遗演出季昆曲专场（地点：恭王府）</p><p>2020.01.06</p></a></div>
+  </div>
+  <div id="m6">
+    <div id="Mimg"><img src="image/6m6.jpg" width="400px"></div>
+    <div id="m6ss"><a href="#"><p>2019全国非遗曲艺周开幕式演出图集</p><p>2019.09.20</p></a></div>
+  </div>
+  <div id="m7">
+    <div id="Mimg"><img src="image/6m7.jpg" width="400px"></div>
+    <div id="m7ss"><a href="#"><p>第二届中国好手艺展入选作品图赏</p><p>2019.08.07</p></a></div>
+  </div>
+  <div id="m8">
+    <div id="Mimg"><img src="image/6m8.jpg" width="400px" height="260px"></div>
+    <div id="m8ss"><a href="#"><p>2019全国非遗曲艺周驻场演出图集</p><p>2019.09.12</p></a></div>
+  </div>
+  <div id="m9">
+    <div id="Mimg"><img src="image/6m9.png" width="400px"></div>
+    <div id="m9ss"><a href="#"><p>中国列入联合国教科文组织非物质文化遗产名录名册项目展示体验活动（下）</p><p>2019.06.17</p></a></div>
+  </div>
+  <div id="m10">
+    <div id="Mimg"><img src="image/6m10.jpg" width="400px"></div>
+    <div id="m10ss"><a href="#"><p>中国列入联合国教科文组织非物质文化遗产名录名册项目展示体验活动（上）</p><p>2019.06.14</p></a></div>
+  </div>
+  <div id="m11">
+    <div id="Mimg"><img src="image/6m11.jpg" width="400px"></div>
+    <div id="m11ss"><a href="#"><p>2019年“文化和自然遗产日”全国非遗宣传展示活动启动仪式暨主会场展演活动</p><p>2019.06.09</p></a></div>
+  </div>
+  <div id="m12">
+    <div id="Mimg"><img src="image/6m12.jpg" width="400px"></div>
+    <div id="m12ss"><a href="#"><p>全国非遗曲艺周演出图集（下）</p><p>2018.06.13</p></a></div>
+  </div>
+  <div id="m13">
+    <div id="Mimg"><img src="image/6m13.jpg" width="400px"></div>
+    <div id="m13ss"><a href="#"><p>全国非遗曲艺周演出图集（上）</p><p>2018.06.13</p></a></div>
+  </div>
+  <div id="m14">
+    <div id="Mimg"><img src="image/6m14.jpg" width="400px" height="260px"></div>
+    <div id="m14ss"><a href="#"><p>柯城九华立春活动</p><p>2018.02.06</p></a></div>
+  </div>
+  <div id="m15">
+    <div id="Mimg"><img src="image/6m15.jpg" width="400px" height="260px"></div>
+    <div id="m15ss"><a href="#"><p>首届“中国好手艺展”入选作品图赏</p><p>2017.12.12</p></a></div>
+  </div>
+  <div id="m16">
+    <div id="Mimg"><img src="image/6m16.jpg" width="400px" height="260px"></div>
+    <div id="m16ss"><a href="#"><p>白族绕三灵</p><p>2016.06.03</p></a></div>
+  </div>
+  <div id="m17">
+    <div id="Mimg"><img src="image/6m17.jpg" width="400px" height="260px"></div>
+    <div id="m17ss"><a href="#"><p>川剧戏班的孤独与坚守</p><p>2014.08.13</p></a></div>
+  </div>
+  <div id="m18">
+    <div id="Mimg"><img src="image/6m18.jpg" width="400px" height="260px"></div>
+    <div id="m18ss"><a href="#"><p>安顺地戏</p><p>2014.08.13</p></a></div>
+  </div>
+</div>
+<div class="foot">
+      <div class="foot1">
+        <span class="letter">👻</span>
+        <span class="letter">略</span>
+        <span class="letter">略</span>
+        <span class="letter">略</span>
+        <span class="letter">略</span>
+      </div>
+    </div>
+<script type="text/javascript" src="https://repo.bfw.wiki/bfwrepo/js/prefixfree.js"></script>
+<script>
+    window.onload = (event) => {
+        const top = document.getElementById('top'),
+            m1 = document.getElementById('m1'),
+            m2 = document.getElementById('m2'),
+            m3 = document.getElementById('m3'),
+            m4 = document.getElementById('m4'),
+            m5 = document.getElementById('m5'),
+            m6 = document.getElementById('m6'),
+            m7 = document.getElementById('m7'),
+            m8 = document.getElementById('m8'),
+            m9 = document.getElementById('m9'),
+            m10 = document.getElementById('m10'),
+            m11 = document.getElementById('m11'),
+            m12 = document.getElementById('m12'),
+            m13 = document.getElementById('m13'),
+            m14 = document.getElementById('m14'),
+            m15 = document.getElementById('m15'),
+            m16 = document.getElementById('m16'),
+            m17 = document.getElementById('m17'),
+            m18 = document.getElementById('m18');
+        const animationClass = 'move';
+        // 创建监听
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            for (entry of entries) {
+                if (entry.intersectionRatio > 0) {
+                    addAnimationClass(entry.target, animationClass);
+                } else {
+                    console.log(animationClass);
+                    removeAnimationClass(entry.target, animationClass);
+                }
+            }
+        });
+        // 添加动画class的操作
+        function addAnimationClass(elem, animationClass) {
+            elem.className.includes(animationClass) ? 1 : elem.className = elem.className + ' ' + animationClass;
+        }
+        // 移除动画class的操作
+        function removeAnimationClass(elem, animationClass) {
+            elem.className.includes(animationClass) ? elem.className = elem.className.replace(animationClass, '') : 1;
+            console.log(elem.className);
+        }
+        // 开启监听
+        intersectionObserver.observe(top);
+        intersectionObserver.observe(m1);
+        intersectionObserver.observe(m2);
+        intersectionObserver.observe(m3);
+        intersectionObserver.observe(m4);
+        intersectionObserver.observe(m5);
+        intersectionObserver.observe(m6);
+        intersectionObserver.observe(m7);
+        intersectionObserver.observe(m8);
+        intersectionObserver.observe(m9);
+        intersectionObserver.observe(m10);
+        intersectionObserver.observe(m11);
+        intersectionObserver.observe(m12);
+        intersectionObserver.observe(m13);
+        intersectionObserver.observe(m14);
+        intersectionObserver.observe(m15);
+        intersectionObserver.observe(m16);
+        intersectionObserver.observe(m17);
+        intersectionObserver.observe(m18);
+    }
+ 
+</script>
+</body>
+</html>
